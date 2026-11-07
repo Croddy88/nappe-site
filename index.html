@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nappé Studio</title>
+<meta name="description" content="Nappé Studio keeps recipes, line builds, training and the menu guide in one place for restaurant groups, front and back of house.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Crect width='240' height='240' rx='54' fill='%232F5D50'/%3E%3Cpath d='M88 140V70M88 96Q88 62 120 62Q152 62 152 96V154' fill='none' stroke='%23F7F3EC' stroke-width='30' stroke-linecap='round'/%3E%3Cpath d='M152 168C152 168 161 180 161 186A9 9 0 0 1 143 186C143 180 152 168 152 168Z' fill='%23F7F3EC'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap">
+<style>
+:root{
+  --sauce:#2F5D50;
+  --sauce-deep:#24493F;
+  --cream:#F7F3EC;
+  --paper:#FFFDF8;
+  --ink:#22302B;
+  --muted:#56635E;
+  --line:#DCD4C6;
+  --butter:#F3D27A;
+  --display:'Bricolage Grotesque', system-ui, sans-serif;
+  --body:'Figtree', system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{display:block}
+a{color:var(--sauce)}
+a:hover{color:var(--sauce-deep)}
+:focus-visible{outline:3px solid var(--sauce);outline-offset:3px;border-radius:4px}
+.wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 28px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:16px;background:var(--paper);padding:8px 14px;z-index:10}
+
+/* The coat: green sauce that drips into the page */
+.coat{background:var(--sauce);color:var(--cream);position:relative}
+.coat a{color:var(--cream)}
+.coat :focus-visible{outline-color:var(--butter)}
+.drips{width:100%;height:90px;color:var(--sauce);background:var(--cream);margin-top:-1px}
+.drips path{transform-origin:top;animation:drip 1.4s cubic-bezier(.3,.7,.2,1) .2s both}
+@keyframes drip{from{transform:scaleY(.27)}to{transform:scaleY(1)}}
+@media (prefers-reduced-motion:reduce){.drips path{animation:none}html{scroll-behavior:auto}}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:24px;padding-bottom:24px;flex-wrap:wrap}
+.mark{font-family:var(--display);font-weight:800;font-size:30px;letter-spacing:-.03em;text-decoration:none;line-height:1}
+.mark span{font-weight:500;opacity:.85}
+.nav{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.nav a{text-decoration:none;font-weight:500;font-size:16px}
+.nav a:hover{text-decoration:underline;text-underline-offset:4px}
+
+.btn{display:inline-block;font-family:var(--body);font-weight:600;font-size:17px;line-height:1;padding:16px 26px;border-radius:999px;text-decoration:none;border:2px solid transparent;cursor:pointer}
+.btn-cream{background:var(--cream);color:var(--sauce)!important}
+.btn-cream:hover{background:var(--paper)}
+.btn-line{border-color:rgba(247,243,236,.6);color:var(--cream)}
+.btn-line:hover{border-color:var(--cream)}
+.btn-sauce{background:var(--sauce);color:var(--cream)}
+.btn-sauce:hover{background:var(--sauce-deep)}
+.nav .btn{padding:12px 20px;font-size:15px}
+
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:center;padding-top:40px;padding-bottom:30px}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(52px,8vw,104px);line-height:.95;letter-spacing:-.045em;margin:0 0 28px}
+.hero p{font-size:21px;line-height:1.55;max-width:34ch;margin:0 0 36px;color:rgba(247,243,236,.9)}
+.ctas{display:flex;gap:14px;flex-wrap:wrap}
+
+/* product card in the hero */
+.card{background:var(--paper);color:var(--ink);border-radius:26px;padding:26px 26px 22px;box-shadow:0 30px 60px -30px rgba(10,30,24,.55);transform:rotate(-2.5deg);max-width:400px;justify-self:center;width:100%}
+.card-head{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted);margin-bottom:10px}
+.pill{background:#E6EEEA;color:var(--sauce);font-weight:600;border-radius:999px;padding:4px 12px;font-size:13px}
+.card h2{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.15;letter-spacing:-.02em;margin:0 0 16px}
+.rows{list-style:none;margin:0 0 16px;padding:0}
+.rows li{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid var(--line);font-size:16px}
+.rows li span:last-child{font-weight:600;font-variant-numeric:tabular-nums}
+.hero .card .tip{background:#F1ECE2;color:var(--ink);border-radius:14px;padding:12px 14px;font-size:14.5px;line-height:1.45;margin:0;max-width:none}
+
+/* sections */
+section{padding:96px 0}
+.lede{font-family:var(--display);font-weight:800;font-size:clamp(36px,5vw,58px);line-height:1.02;letter-spacing:-.035em;margin:0 0 18px;max-width:18ch}
+.sub{color:var(--muted);font-size:19px;max-width:52ch;margin:0}
+
+.groups{margin-top:56px;display:grid;gap:0}
+.group{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:40px;padding:34px 0;border-top:2px solid var(--ink)}
+.group h3{font-family:var(--display);font-weight:700;font-size:28px;letter-spacing:-.02em;margin:0;line-height:1.1}
+.mods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 40px;margin:0}
+.mods dt{font-weight:600;font-size:19px;margin:0 0 4px}
+.mods dd{margin:0;color:var(--muted);font-size:17px;line-height:1.55}
+
+.house{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.house-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start}
+.points{list-style:none;margin:0;padding:0}
+.points li{padding:22px 0;border-top:1px solid var(--line);font-size:18px}
+.points li:first-child{border-top:0;padding-top:4px}
+.points strong{display:block;font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.01em;margin-bottom:4px}
+
+.made{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px;align-items:center}
+.made p{font-size:20px;line-height:1.6;max-width:44ch;margin:0 0 16px}
+.made blockquote{margin:0;font-family:var(--display);font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.12;letter-spacing:-.025em;color:var(--sauce)}
+
+/* demo: the coat again, rising from below */
+.demo{padding:0 0 0;background:var(--sauce);color:var(--cream)}
+.demo a{color:var(--cream)}
+.demo-inner{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px;padding-top:96px;padding-bottom:96px;align-items:start}
+.demo h2{font-family:var(--display);font-weight:800;font-size:clamp(38px,5vw,60px);line-height:1;letter-spacing:-.035em;margin:0 0 18px}
+.demo p{color:rgba(247,243,236,.9);font-size:19px;max-width:36ch;margin:0 0 14px}
+form{background:var(--paper);color:var(--ink);border-radius:24px;padding:32px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+label{font-weight:600;font-size:15px}
+input,select,textarea{font:inherit;font-size:17px;color:var(--ink);background:#fff;border:1.5px solid #B9B0A1;border-radius:12px;padding:12px 14px;width:100%}
+textarea{min-height:110px;resize:vertical}
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--sauce);outline-offset:1px;border-color:var(--sauce)}
+.form-foot{grid-column:1/-1;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.status{font-size:15px;color:var(--muted);margin:0}
+.hidden{display:none}
+
+footer{background:var(--sauce-deep);color:rgba(247,243,236,.85);padding:28px 0;font-size:15px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--cream)}
+
+@media (max-width:900px){
+  .hero,.house-grid,.made,.demo-inner{grid-template-columns:minmax(0,1fr);gap:40px}
+  .card{transform:rotate(-1.5deg)}
+  .group{grid-template-columns:minmax(0,1fr);gap:20px}
+  section{padding:72px 0}
+}
+@media (max-width:620px){
+  body{font-size:17px}
+  .nav a:not(.btn):not(.signin){display:none}
+  .nav{gap:18px}
+  .mods{grid-template-columns:minmax(0,1fr)}
+  form{grid-template-columns:minmax(0,1fr);padding:24px}
+  .drips{height:56px}
+  .hero p{font-size:19px}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="coat">
+  <div class="wrap top">
+    <a class="mark" href="#" aria-label="Nappé Studio, home">nappé <span>studio</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#inside">What's inside</a>
+      <a href="#groups">For groups</a>
+      <a href="#made">Our story</a>
+      <a class="signin" href="https://app.nappestudio.com">Sign in</a>
+      <a class="btn btn-cream" href="#demo">Request a demo</a>
+    </nav>
+  </div>
+
+  <div class="wrap hero">
+    <div>
+      <h1>One house, front to back.</h1>
+      <p>Nappé Studio keeps your recipes, line builds, training and menu guide in one place, so the kitchen and the floor work from the same page at every concept you run.</p>
+      <div class="ctas">
+        <a class="btn btn-cream" href="#demo">Request a demo</a>
+        <a class="btn btn-line" href="#inside">See what's inside</a>
+      </div>
+    </div>
+
+    <article class="card" aria-label="Example line build card">
+      <div class="card-head"><span>Line build</span><span class="pill">Sauté</span></div>
+      <h2>Seared salmon, beurre blanc, spring peas</h2>
+      <ul class="rows">
+        <li><span>Salmon, skin on</span><span>170 g</span></li>
+        <li><span>Beurre blanc</span><span>60 g</span></li>
+        <li><span>Spring peas, blanched</span><span>45 g</span></li>
+        <li><span>Chive, fine cut</span><span>2 g</span></li>
+      </ul>
+      <p class="tip">Nappe the plate with beurre blanc before the fish goes down. Skin side up, always.</p>
+    </article>
+  </div>
+  <svg class="drips" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 0H1440V24H1352V58Q1352 74 1338 74Q1324 74 1324 58V24H1196V40Q1196 52 1185 52Q1174 52 1174 40V24H792V74Q792 88 778 88Q764 88 764 74V24H548V50Q548 62 537 62Q526 62 526 50V24H212V66Q212 80 198 80Q184 80 184 66V24H0Z"/></svg>
+</header>
+
+<main id="main">
+
+<section id="inside">
+  <div class="wrap">
+    <h2 class="lede">Everything your kitchen writes down, in one studio.</h2>
+    <p class="sub">Specs stop living in binders, group texts and somebody's memory. Each team sees the part of the studio it needs.</p>
+
+    <div class="groups">
+      <div class="group">
+        <h3>Back of house</h3>
+        <dl class="mods">
+          <div><dt>Recipes</dt><dd>Written in grams, with photos and video for the steps that matter.</dd></div>
+          <div><dt>Line builds</dt><dd>Station-by-station plating specs a cook can follow in the middle of service.</dd></div>
+          <div><dt>Ingredients and invoices</dt><dd>Upload an invoice and the studio reads it for you, keeping ingredient costs current.</dd></div>
+          <div><dt>Nutritionals</dt><dd>Nutrition and allergen estimates built from your recipes, ready for your team to check.</dd></div>
+        </dl>
+      </div>
+      <div class="group">
+        <h3>Front of house</h3>
+        <dl class="mods">
+          <div><dt>Menu guide</dt><dd>Dish descriptions, allergens and talking points for servers, drafted for you and approved by a manager.</dd></div>
+          <div><dt>The right view for each role</dt><dd>Servers, hosts and bartenders see the menu guide. Your recipes stay in the kitchen.</dd></div>
+        </dl>
+      </div>
+      <div class="group">
+        <h3>Every shift</h3>
+        <dl class="mods">
+          <div><dt>Learning center</dt><dd>Training modules for new hires and refreshers for everyone else.</dd></div>
+          <div><dt>Daily tools</dt><dd>Station maps, line checks and shift notes on the phone already in their pocket.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="groups" class="house">
+  <div class="wrap house-grid">
+    <div>
+      <h2 class="lede">Built for groups with more than one concept.</h2>
+      <p class="sub">Run a taqueria, a cocktail bar and a tasting room from one account, without their specs bleeding into each other.</p>
+    </div>
+    <ul class="points">
+      <li><strong>Every concept keeps its own book</strong>Recipes, menus and invoices stay with the concept and market they belong to, and shared recipes stay shared.</li>
+      <li><strong>Roles decide who sees what</strong>Chefs, managers and servers each get their own view, plus limited editors for HR or receiving.</li>
+      <li><strong>On the line and in the office</strong>It installs on any phone like an app and works just as well on the office computer.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="made">
+  <div class="wrap made">
+    <blockquote>Designed for a cook with wet hands and thirty seconds to spare.</blockquote>
+    <div>
+      <h2 class="lede" style="font-size:clamp(30px,3.6vw,42px)">Made on the line.</h2>
+      <p>Nappé Studio was built by a working chef who got tired of chasing the current version of a spec. Every screen starts from the same question: can someone use this during a Friday push?</p>
+      <p>The name comes from nappe, the point where a sauce coats the back of a spoon. It is the test every cook learns early, and the standard we hold the studio to.</p>
+    </div>
+  </div>
+</section>
+
+<section id="demo" class="demo" aria-labelledby="demo-title">
+  <div class="wrap demo-inner">
+    <div>
+      <h2 id="demo-title">See it with your own menu.</h2>
+      <p>Tell us a little about your group and we'll walk you through the studio with a few of your own dishes loaded in.</p>
+      <p>Prefer email? Write to <a href="mailto:hello@nappestudio.com">hello@nappestudio.com</a>.</p>
+    </div>
+
+    <form id="demo-form" name="demo" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="demo">
+      <p class="hidden"><label>Leave this empty <input name="bot-field"></label></p>
+      <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
+      <div class="field"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="f-group">Restaurant group</label><input id="f-group" name="group" autocomplete="organization"></div>
+      <div class="field"><label for="f-locs">Number of locations</label>
+        <select id="f-locs" name="locations">
+          <option>1</option><option>2 to 5</option><option>6 to 15</option><option>16 or more</option>
+        </select>
+      </div>
+      <div class="field full"><label for="f-note">What would you like to see?</label><textarea id="f-note" name="message"></textarea></div>
+      <div class="form-foot">
+        <button class="btn btn-sauce" type="submit">Request a demo</button>
+        <p class="status" id="form-status" role="status"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Nappé Studio</span>
+    <span><a href="https://app.nappestudio.com">Sign in</a> &nbsp;·&nbsp; <a href="mailto:hello@nappestudio.com">hello@nappestudio.com</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var form = document.getElementById('demo-form');
+  var status = document.getElementById('form-status');
+  var host = location.hostname || '';
+  var live = /nappestudio\.com$|netlify\.app$/.test(host);
+  form.addEventListener('submit', function(e){
+    if (live) {
+      e.preventDefault();
+      var data = new URLSearchParams(new FormData(form)).toString();
+      status.textContent = 'Sending your request…';
+      fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:data})
+        .then(function(r){
+          if (!r.ok) throw new Error();
+          form.reset();
+          status.textContent = 'Request sent. We'll be in touch soon.';
+        })
+        .catch(function(){
+          status.textContent = 'That didn’t go through. Email hello@nappestudio.com and we will set it up.';
+        });
+    } else {
+      e.preventDefault();
+      status.textContent = 'This is a preview. On nappestudio.com, this button sends the request to your inbox.';
+    }
+  });
+})();
+</script>
+</body>
+</html>

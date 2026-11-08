@@ -65,11 +65,21 @@ section{padding:72px 0}
 .plan li.plus::before{border:0;width:auto;height:auto;transform:none;content:"+";top:6px;left:3px;color:var(--sauce);font-weight:700}
 
 /* add-ons */
-.addons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:30px}
+.addons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:30px}
 .addon{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px}
 .addon h3{font-family:var(--display);font-weight:700;font-size:22px;margin:0 0 4px;letter-spacing:-.01em}
 .addon .ap{font-weight:700;color:var(--sauce);margin:0 0 8px;font-size:16.5px}
 .addon p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.5}
+
+/* volume */
+.vol{margin-top:34px;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:26px}
+.vol h3{font-family:var(--display);font-weight:700;font-size:24px;margin:0 0 6px;letter-spacing:-.01em}
+.vol-grid{display:grid;align-items:start;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin-top:16px}
+.vol table{width:100%;border-collapse:collapse;font-size:16px}
+.vol caption{text-align:left;font-weight:700;padding:0 0 6px}
+.vol th{text-align:left;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:6px 0;border-bottom:1.5px solid var(--line)}
+.vol td{padding:9px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.vol td:last-child,.vol th:last-child{text-align:right}
 
 /* calculator */
 .calc-sec{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -118,7 +128,7 @@ footer{background:var(--sauce-deep);color:rgba(247,243,236,.85);padding:28px 0;f
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap} footer a{color:var(--cream)}
 
 @media (max-width:1020px){ .plans{grid-template-columns:repeat(2,minmax(0,1fr))} .calc{grid-template-columns:minmax(0,1fr)} .total{position:static} }
-@media (max-width:760px){ .addons,.faq{grid-template-columns:minmax(0,1fr)} }
+@media (max-width:760px){ .vol-grid,.addons,.faq{grid-template-columns:minmax(0,1fr)} }
 @media (max-width:620px){
   body{font-size:17px} .nav a:not(.btn):not(.signin){display:none} .nav{gap:18px}
   .plans{grid-template-columns:minmax(0,1fr)} .checks{grid-template-columns:minmax(0,1fr)} section{padding:56px 0}
@@ -193,12 +203,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <h3>Group</h3>
         <p class="for">Several concepts, or three or more locations.</p>
         <div class="price" data-price="149">$149<small> /month</small></div>
-        <p class="per">per location · 3 location minimum · 40 people each</p>
+        <p class="per">per location, less with more locations · 3 location minimum</p>
         <ul>
           <li class="plus">Everything in Pro</li>
           <li>Every concept in one account, each with its own specs</li>
           <li>Switch between concepts and see the whole group</li>
           <li>We load your existing specs when you start</li>
+          <li>Volume pricing as you grow (below)</li>
           <li>Lower HR &amp; Compliance price</li>
         </ul>
         <a class="btn btn-line" href="#calc" data-plan="group">Price it</a>
@@ -212,13 +223,31 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <li class="plus">Everything in Group</li>
           <li>CrunchTime connection included</li>
           <li>HR &amp; Compliance included</li>
-          <li>Custom training and data import</li>
+          <li>Optional done-for-you setup: we build your recipes, line builds and training for a one-time fee</li>
           <li>A direct line to the team</li>
         </ul>
         <a class="btn btn-line" href="/#demo">Contact us</a>
       </article>
     </div>
     <p class="sub" style="margin-top:18px;font-size:16px">More people than your plan includes? It's $2 a month for each extra person. Anyone with their own login counts as a person.</p>
+
+    <div class="vol" id="volume">
+      <h3>Volume pricing on Group</h3>
+      <p class="sub" style="font-size:16px">The more you run, the less each one costs. Location prices step down like tax brackets: your first 3 locations are $149 each, the next ones less. The concept discount then comes off the location total.</p>
+      <div class="vol-grid">
+        <table>
+          <caption>Price per location</caption>
+          <thead><tr><th scope="col">Locations</th><th scope="col">Each, per month</th></tr></thead>
+          <tbody id="vol-locs"></tbody>
+        </table>
+        <table>
+          <caption>Discount by number of concepts</caption>
+          <thead><tr><th scope="col">Concepts</th><th scope="col">Discount</th></tr></thead>
+          <tbody id="vol-concepts"></tbody>
+        </table>
+      </div>
+      <p class="sub" style="font-size:15px;margin-top:12px">Example: 4 concepts with 7 locations pays 3 × $149 + 2 × $139 + 2 × $129 = $983, then 5% off, for $933.85 a month.</p>
+    </div>
   </div>
 </section>
 
@@ -235,6 +264,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <h3>CrunchTime connection</h3>
         <p class="ap">$49 / month per company</p>
         <p>Brings your CrunchTime item prices and counts into Nappé Studio with your own CrunchTime account. Included on Enterprise.</p>
+      </div>
+      <div class="addon">
+        <h3>Done-for-you setup</h3>
+        <p class="ap">One-time fee, quoted with your plan</p>
+        <p>For Enterprise and custom plans, we can build your studio for you: recipes and line builds from your existing files, photos, menus, station maps and training modules. Priced once, based on how much there is.</p>
       </div>
       <div class="addon">
         <h3>Yearly billing</h3>
@@ -312,6 +346,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div><h3>Can I change plans later?</h3><p>Yes, up or down, any month. Your recipes, training records and settings stay exactly where they are.</p></div>
       <div><h3>Is there a contract?</h3><p>Monthly plans can be canceled any time. Yearly plans are paid up front for twelve months, with two of them free.</p></div>
       <div><h3>Do you help us get set up?</h3><p>Every plan comes with a welcome tour and training modules. On Group and Enterprise we load your existing recipes and line builds for you.</p></div>
+      <div><h3>Can you set everything up for us?</h3><p>Yes. On Enterprise and custom plans we can build your recipes, line builds, menus, station maps and training for a one-time setup fee. Send us what you have and we’ll quote it with your plan.</p></div>
       <div><h3>Can I try it first?</h3><p><a href="https://app.nappestudio.com/?demo">Open the demo studio</a>. It signs you straight in with a sample restaurant group and a short guided tour.</p></div>
     </div>
   </div>
@@ -333,6 +368,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     starter: { name: 'Starter', price: 79, people: 15 },          // 1 location, up to 15 people
     pro: { name: 'Pro', price: 179, peoplePerLoc: 40 },            // per location
     group: { name: 'Group', price: 149, peoplePerLoc: 40, minLocs: 3 },
+    // Group price per location, by bracket: [from location, to location, price each]
+    locBreaks: [[1, 3, 149], [4, 5, 139], [6, 10, 129], [11, 15, 119], [16, 9999, 109]],
+    // discount off the location total, by number of concepts: [from, to, percent]
+    conceptBreaks: [[1, 3, 0], [4, 5, 5], [6, 10, 10], [11, 999, 15]],
     enterpriseFrom: 16,                                             // locations
     extraPerson: 2,
     hr: { perLoc: 39, groupPerLoc: 29, peoplePerLoc: 40, extraPerson: 0.75 },
@@ -341,7 +380,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   };
   var bill = 'month';
   var $ = function (id) { return document.getElementById(id); };
-  var money = function (n) { return '$' + (Math.round(n * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }); };
+  var money = function (n) { var a = Math.abs(n); return (n < 0 ? '\u2212' : '') + '$' + (Math.round(a * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: a % 1 ? 2 : 0, maximumFractionDigits: 2 }); };
   var num = function (id, min, max) { var v = parseInt($(id).value, 10); if (isNaN(v)) v = min; return Math.max(min, Math.min(max, v)); };
 
   function calc() {
@@ -365,10 +404,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     var lines = [], total = 0;
     var line = function (label, amt) { lines.push([label, amt]); total += amt; };
     if (plan === 'starter') line('Starter, 1 location', P.starter.price);
+    else if (plan === 'pro') line('Pro, ' + locs + ' location' + (locs === 1 ? '' : 's') + ' × ' + money(P.pro.price), locs * P.pro.price);
     else {
-      var p = plan === 'pro' ? P.pro : P.group, billLocs = plan === 'group' || plan === 'enterprise' ? Math.max(locs, P.group.minLocs) : locs;
-      var unit = plan === 'pro' ? P.pro.price : P.group.price;
-      line((plan === 'pro' ? 'Pro' : 'Group') + ', ' + billLocs + ' location' + (billLocs === 1 ? '' : 's') + ' × ' + money(unit) + (billLocs > locs ? ' (3 minimum)' : ''), billLocs * unit);
+      var billLocs = Math.max(locs, P.group.minLocs), locTotal = 0;
+      P.locBreaks.forEach(function (b) {
+        var n = Math.max(0, Math.min(billLocs, b[1]) - b[0] + 1); if (!n) return;
+        locTotal += n * b[2];
+        line('Group, location' + (n === 1 ? ' ' + b[0] : 's ' + b[0] + '\u2013' + (b[0] + n - 1)) + ': ' + n + ' × ' + money(b[2]) + (billLocs > locs && b[0] === 1 ? ' (3 minimum)' : ''), n * b[2]);
+      });
+      var cb = P.conceptBreaks.filter(function (b) { return concepts >= b[0] && concepts <= b[1]; })[0];
+      if (cb && cb[2]) line(cb[2] + '% off for ' + concepts + ' concepts', -Math.round(locTotal * cb[2]) / 100);
     }
     var included = plan === 'starter' ? P.starter.people : locs * P.pro.peoplePerLoc;
     var extra = Math.max(0, people - included);
@@ -383,7 +428,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     $('t-plan').textContent = plan === 'enterprise' ? 'Enterprise' : P[plan].name;
     $('t-why').textContent = why;
     var talk = $('t-talk');
-    if (plan === 'enterprise') { talk.hidden = false; talk.textContent = 'With this many locations we set a custom price, usually below this estimate. Tell us about your group and we’ll send a quote.'; }
+    if (plan === 'enterprise') { talk.hidden = false; talk.textContent = 'With this many locations we set a custom price, usually below this estimate. We can also build your recipes, line builds and training for you for a one-time setup fee. Tell us about your group and we’ll send a quote.'; }
     else talk.hidden = true;
     $('t-lines').innerHTML = lines.map(function (l) { return '<li><span>' + l[0] + '</span><span>' + (typeof l[1] === 'number' ? money(l[1]) : l[1]) + '</span></li>'; }).join('');
     var shown = bill === 'year' ? total * P.yearMonths / 12 : total;
@@ -424,6 +469,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       calc();
     });
   });
+  $('vol-locs').innerHTML = P.locBreaks.map(function (b) { return '<tr><td>' + (b[1] > 999 ? b[0] + ' and up' : b[0] === b[1] ? b[0] : b[0] + '\u2013' + b[1]) + '</td><td>' + money(b[2]) + '</td></tr>'; }).join('');
+  $('vol-concepts').innerHTML = P.conceptBreaks.map(function (b) { return '<tr><td>' + (b[1] > 99 ? b[0] + ' and up' : b[0] + '\u2013' + b[1]) + '</td><td>' + (b[2] ? b[2] + '% off' : 'Standard') + '</td></tr>'; }).join('');
   setBill('month');
 })();
 </script>

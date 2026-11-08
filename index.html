@@ -85,6 +85,12 @@ section{padding:96px 0}
 .mods dt{font-weight:600;font-size:19px;margin:0 0 4px}
 .mods dd{margin:0;color:var(--muted);font-size:17px;line-height:1.55}
 
+.promise{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.promise-inner{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:24px 64px;align-items:start}
+.promise-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.promise-list li{border-top:2px solid var(--ink);padding-top:14px;font-size:16px;color:var(--muted);line-height:1.5}
+.promise-list strong{display:block;color:var(--ink);font-family:var(--display);font-size:20px;margin-bottom:4px;letter-spacing:-.01em}
+@media (max-width:900px){.promise-inner,.promise-list{grid-template-columns:minmax(0,1fr)}}
 .house{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .house-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start}
 .points{list-style:none;margin:0;padding:0}
@@ -125,7 +131,7 @@ footer a{color:var(--cream)}
 }
 @media (max-width:620px){
   body{font-size:17px}
-  .nav a:not(.btn):not(.signin){display:none}
+  .nav a:not(.btn):not(.signin):not(.keep){display:none}
   .nav{gap:18px}
   .mods{grid-template-columns:minmax(0,1fr)}
   form{grid-template-columns:minmax(0,1fr);padding:24px}
@@ -144,7 +150,7 @@ footer a{color:var(--cream)}
       <a href="#inside">What's inside</a>
       <a href="#groups">For groups</a>
       <a href="#made">Our story</a>
-      <a href="/pricing">Pricing</a>
+      <a class="keep" href="/pricing">Pricing</a>
       <a class="signin" href="https://app.nappestudio.com">Sign in</a>
       <a class="btn btn-cream" href="#demo">Request a demo</a>
     </nav>
@@ -153,7 +159,7 @@ footer a{color:var(--cream)}
   <div class="wrap hero">
     <div>
       <h1>One house, front to back.</h1>
-      <p>Nappé Studio keeps your recipes, line builds, training and menu guide in one place, so the kitchen and the floor work from the same page at every concept you run.</p>
+      <p>Nappé Studio keeps your recipes, line builds, costs, training and menu guide in one place, in English and Spanish, so the kitchen and the floor work from the same page at every concept you run.</p>
       <div class="ctas">
         <a class="btn btn-cream" href="#demo">Request a demo</a>
         <a class="btn btn-line" href="https://app.nappestudio.com/?demo">Try the demo</a>
@@ -188,24 +194,34 @@ footer a{color:var(--cream)}
         <dl class="mods">
           <div><dt>Recipes</dt><dd>Written in grams, with photos and video for the steps that matter.</dd></div>
           <div><dt>Line builds</dt><dd>Station-by-station plating specs a cook can follow in the middle of service.</dd></div>
-          <div><dt>Ingredients and invoices</dt><dd>Upload an invoice and the studio reads it for you, keeping ingredient costs current.</dd></div>
+          <div><dt>Ingredients and plate costs</dt><dd>Upload or email an invoice and the studio reads it for you, keeping ingredient prices and every plate cost current.</dd></div>
           <div><dt>Nutritionals</dt><dd>Nutrition and allergen estimates built from your recipes, ready for your team to check.</dd></div>
+          <div><dt>Print-ready specs</dt><dd>Recipe sheets and line build cards formatted for the binder, the pass or the walk-in door.</dd></div>
         </dl>
       </div>
       <div class="group">
         <h3>Front of house</h3>
         <dl class="mods">
           <div><dt>Menu guide</dt><dd>Dish descriptions, allergens and talking points for servers, drafted for you and approved by a manager.</dd></div>
-          <div><dt>The right view for each role</dt><dd>Servers, hosts and bartenders see the menu guide. Your recipes stay in the kitchen.</dd></div>
+          <div><dt>The right view for each role</dt><dd>Servers, hosts and bartenders see the menu guide. Your recipes and costs stay in the kitchen.</dd></div>
         </dl>
       </div>
       <div class="group">
         <h3>Every shift</h3>
         <dl class="mods">
-          <div><dt>Learning center</dt><dd>Training modules for new hires and refreshers for everyone else.</dd></div>
-          <div><dt>Daily tools</dt><dd>Station maps, line checks and shift notes on the phone already in their pocket.</dd></div>
+          <div><dt>Learning center</dt><dd>Training modules with video and tests, a welcome tour for new hires, and a record of who finished what.</dd></div>
+          <div><dt>Daily tools</dt><dd>Station maps, line checks, shift notes and your menus, linked to the line build behind each dish, on the phone already in their pocket.</dd></div>
         </dl>
       </div>
+        <div class="group">
+          <h3>Across the studio</h3>
+          <dl class="mods">
+            <div><dt>English and Spanish</dt><dd>One tap switches the whole studio, recipes and training included. New specs are translated as soon as they're saved.</dd></div>
+            <div><dt>nappAI</dt><dd>Ask how a dish is built or what a plate costs and get an answer from your own specs. It reads invoices and drafts the menu guide too.</dd></div>
+            <div><dt>Every change on record</dt><dd>See who changed a spec and when, jump straight to the change, and undo it in one click.</dd></div>
+            <div><dt>Add-ons when you need them</dt><dd>HR &amp; Compliance for harassment and safety training, concern reporting, sign-offs and certifications. A CrunchTime connection for your item prices.</dd></div>
+          </dl>
+        </div>
     </div>
   </div>
 </section>
@@ -218,8 +234,23 @@ footer a{color:var(--cream)}
     </div>
     <ul class="points">
       <li><strong>Every concept keeps its own book</strong>Recipes, menus and invoices stay with the concept and market they belong to, and shared recipes stay shared.</li>
-      <li><strong>Roles decide who sees what</strong>Chefs, managers and servers each get their own view, plus limited editors for HR or receiving.</li>
+      <li><strong>Roles decide who sees what</strong>Chefs, managers and servers each get their own view, and HR gets its own account that never sees a recipe.</li>
       <li><strong>On the line and in the office</strong>It installs on any phone like an app and works just as well on the office computer.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="price-promise" class="promise">
+  <div class="wrap promise-inner">
+    <div>
+      <h2 class="lede" style="font-size:clamp(30px,3.6vw,42px)">Clear pricing. No surprises.</h2>
+      <p class="sub">Every price is on the page, and the calculator shows what your next location or concept will cost before you open it.</p>
+      <a class="btn btn-sauce" href="/pricing" style="margin-top:22px">See pricing</a>
+    </div>
+    <ul class="promise-list">
+      <li><strong>No hidden fees</strong>No setup fees on standard plans, no per-feature charges, nothing added at checkout.</li>
+      <li><strong>Know before you grow</strong>Volume pricing is published, so a new location never comes with a surprise bill.</li>
+      <li><strong>Change any month</strong>Move between plans as you grow. Your specs and training records stay put.</li>
     </ul>
   </div>
 </section>

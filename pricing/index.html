@@ -34,8 +34,10 @@ a{color:var(--sauce)} a:hover{color:var(--sauce-deep)}
 .btn-sauce{background:var(--sauce);color:var(--cream)!important} .btn-sauce:hover{background:var(--sauce-deep)}
 .btn-line{border-color:var(--line);color:var(--ink)!important;background:transparent} .btn-line:hover{border-color:var(--ink)}
 .nav .btn{padding:12px 20px;font-size:15px}
-.intro{padding:24px 0 36px}
+.intro{padding-top:24px;padding-bottom:36px}
 .intro h1{font-family:var(--display);font-weight:800;font-size:clamp(46px,7vw,86px);line-height:.95;letter-spacing:-.045em;margin:0 0 20px}
+.promises{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.promises li{border:1.5px solid rgba(247,243,236,.45);border-radius:999px;padding:7px 16px;font-size:15px;font-weight:600}
 .intro p{font-size:21px;max-width:44ch;margin:0;color:rgba(247,243,236,.9)}
 section{padding:72px 0}
 .lede{font-family:var(--display);font-weight:800;font-size:clamp(32px,4.4vw,50px);line-height:1.02;letter-spacing:-.035em;margin:0 0 14px}
@@ -130,7 +132,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 @media (max-width:1020px){ .plans{grid-template-columns:repeat(2,minmax(0,1fr))} .calc{grid-template-columns:minmax(0,1fr)} .total{position:static} }
 @media (max-width:760px){ .vol-grid,.addons,.faq{grid-template-columns:minmax(0,1fr)} }
 @media (max-width:620px){
-  body{font-size:17px} .nav a:not(.btn):not(.signin){display:none} .nav{gap:18px}
+  body{font-size:17px} .nav a:not(.btn):not(.signin):not(.keep){display:none} .nav{gap:18px}
   .plans{grid-template-columns:minmax(0,1fr)} .checks{grid-template-columns:minmax(0,1fr)} section{padding:56px 0}
   .plan .for,.per{min-height:0}
 }
@@ -146,14 +148,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <nav class="nav" aria-label="Main">
       <a href="/#inside">What's inside</a>
       <a href="/#groups">For groups</a>
-      <a href="/pricing" aria-current="page">Pricing</a>
+      <a class="keep" href="/pricing" aria-current="page">Pricing</a>
       <a class="signin" href="https://app.nappestudio.com">Sign in</a>
       <a class="btn btn-cream" href="/#demo">Request a demo</a>
     </nav>
   </div>
   <div class="wrap intro">
-    <h1>Simple pricing, per location.</h1>
-    <p>Pick a plan, add what you need, and see your price before you talk to anyone. No setup fees.</p>
+    <h1>Clear pricing. No surprises.</h1>
+    <p>Every price is on this page. No hidden fees, no setup fees on standard plans, and you can see what your next location will cost before you grow.</p>
+    <ul class="promises"><li>No hidden fees</li><li>Know future costs before you grow</li><li>Change or cancel any month</li></ul>
   </div>
   <svg class="drips" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 0H1440V24H1352V58Q1352 74 1338 74Q1324 74 1324 58V24H1196V40Q1196 52 1185 52Q1174 52 1174 40V24H792V74Q792 88 778 88Q764 88 764 74V24H548V50Q548 62 537 62Q526 62 526 50V24H212V66Q212 80 198 80Q184 80 184 66V24H0Z"/></svg>
 </header>
@@ -281,8 +284,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <section id="calc" class="calc-sec" aria-labelledby="calc-title">
   <div class="wrap">
-    <h2 class="lede" id="calc-title">What would it cost you?</h2>
-    <p class="sub">Answer four questions. We pick the plan that fits and show every line of the price.</p>
+    <h2 class="lede" id="calc-title">What would it cost you, now and later?</h2>
+    <p class="sub">Answer four questions. We pick the plan that fits and show every line of the price. Change the numbers to see what a new location or concept would add.</p>
 
     <div class="calc">
       <div class="qs">

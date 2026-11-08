@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing · Nappé Studio</title>
+<meta name="description" content="Nappé Studio plans and pricing for restaurants and restaurant groups, with a calculator to price your own setup.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Crect width='240' height='240' rx='54' fill='%232F5D50'/%3E%3Cpath d='M88 140V70M88 96Q88 62 120 62Q152 62 152 96V154' fill='none' stroke='%23F7F3EC' stroke-width='30' stroke-linecap='round'/%3E%3Cpath d='M152 168C152 168 161 180 161 186A9 9 0 0 1 143 186C143 180 152 168 152 168Z' fill='%23F7F3EC'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --sauce:#2F5D50; --sauce-deep:#24493F; --cream:#F7F3EC; --paper:#FFFDF8; --ink:#22302B; --muted:#56635E; --line:#DCD4C6; --butter:#F3D27A; --mint:#E6EEEA;
+  --display:'Bricolage Grotesque', system-ui, sans-serif; --body:'Figtree', system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--sauce)} a:hover{color:var(--sauce-deep)}
+:focus-visible{outline:3px solid var(--sauce);outline-offset:3px;border-radius:4px}
+.wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 28px}
+.skip{position:absolute;left:-9999px} .skip:focus{left:16px;top:16px;background:var(--paper);padding:8px 14px;z-index:10}
+.coat{background:var(--sauce);color:var(--cream)} .coat a{color:var(--cream)} .coat :focus-visible{outline-color:var(--butter)}
+.drips{display:block;width:100%;height:70px;color:var(--sauce);background:var(--cream);margin-top:-1px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:24px;padding-bottom:24px;flex-wrap:wrap}
+.mark{font-family:var(--display);font-weight:800;font-size:30px;letter-spacing:-.03em;text-decoration:none;line-height:1}
+.mark span{font-weight:500;opacity:.85}
+.nav{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.nav a{text-decoration:none;font-weight:500;font-size:16px} .nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.nav a[aria-current="page"]{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}
+.btn{display:inline-block;font-family:var(--body);font-weight:600;font-size:17px;line-height:1;padding:16px 26px;border-radius:999px;text-decoration:none;border:2px solid transparent;cursor:pointer;text-align:center}
+.btn-cream{background:var(--cream);color:var(--sauce)!important} .btn-cream:hover{background:var(--paper)}
+.btn-sauce{background:var(--sauce);color:var(--cream)!important} .btn-sauce:hover{background:var(--sauce-deep)}
+.btn-line{border-color:var(--line);color:var(--ink)!important;background:transparent} .btn-line:hover{border-color:var(--ink)}
+.nav .btn{padding:12px 20px;font-size:15px}
+.intro{padding:24px 0 36px}
+.intro h1{font-family:var(--display);font-weight:800;font-size:clamp(46px,7vw,86px);line-height:.95;letter-spacing:-.045em;margin:0 0 20px}
+.intro p{font-size:21px;max-width:44ch;margin:0;color:rgba(247,243,236,.9)}
+section{padding:72px 0}
+.lede{font-family:var(--display);font-weight:800;font-size:clamp(32px,4.4vw,50px);line-height:1.02;letter-spacing:-.035em;margin:0 0 14px}
+.sub{color:var(--muted);font-size:19px;max-width:56ch;margin:0}
+
+/* billing switch */
+.bill{display:inline-flex;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px;margin:26px 0 0}
+.bill button{font:inherit;font-size:15px;font-weight:600;border:0;background:transparent;color:var(--muted);padding:9px 18px;border-radius:999px;cursor:pointer}
+.bill button[aria-pressed="true"]{background:var(--sauce);color:var(--cream)}
+.bill small{font-weight:500;opacity:.85}
+
+/* plans */
+.plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:30px}
+.plan{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:26px 22px 22px;display:flex;flex-direction:column}
+.plan.is-pop{border:2px solid var(--sauce);box-shadow:0 24px 50px -30px rgba(10,30,24,.45);position:relative}
+.tag{position:absolute;top:-13px;left:22px;background:var(--sauce);color:var(--cream);font-size:12.5px;font-weight:700;letter-spacing:.04em;padding:4px 12px;border-radius:999px}
+.plan h3{font-family:var(--display);font-weight:700;font-size:26px;letter-spacing:-.02em;margin:0}
+.plan .for{color:var(--muted);font-size:15.5px;margin:4px 0 18px;line-height:1.45;min-height:46px}
+.price{font-family:var(--display);font-weight:800;font-size:46px;letter-spacing:-.03em;line-height:1}
+.price small{font-family:var(--body);font-size:15px;font-weight:500;color:var(--muted);letter-spacing:0}
+.per{color:var(--muted);font-size:14.5px;margin:6px 0 18px;min-height:22px}
+.plan ul{list-style:none;margin:0 0 22px;padding:0;font-size:15.5px;flex:1}
+.plan li{padding:7px 0 7px 26px;border-top:1px solid var(--line);position:relative;line-height:1.4}
+.plan li:first-child{border-top:0}
+.plan li::before{content:"";position:absolute;left:2px;top:12px;width:12px;height:7px;border-left:2.5px solid var(--sauce);border-bottom:2.5px solid var(--sauce);transform:rotate(-45deg)}
+.plan li.plus{font-weight:600}
+.plan li.plus::before{border:0;width:auto;height:auto;transform:none;content:"+";top:6px;left:3px;color:var(--sauce);font-weight:700}
+
+/* add-ons */
+.addons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:30px}
+.addon{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px}
+.addon h3{font-family:var(--display);font-weight:700;font-size:22px;margin:0 0 4px;letter-spacing:-.01em}
+.addon .ap{font-weight:700;color:var(--sauce);margin:0 0 8px;font-size:16.5px}
+.addon p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.5}
+
+/* calculator */
+.calc-sec{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.calc{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:40px;margin-top:34px;align-items:start}
+.qs{display:flex;flex-direction:column;gap:26px}
+.q label,.q legend{display:block;font-weight:700;font-size:17px;margin:0 0 4px}
+.q .hint{color:var(--muted);font-size:14.5px;margin:0 0 10px;line-height:1.45}
+fieldset{border:0;margin:0;padding:0}
+.step{display:flex;align-items:center;gap:0;border:1.5px solid #B9B0A1;border-radius:14px;overflow:hidden;width:max-content;background:#fff}
+.step button{font:inherit;font-size:22px;font-weight:600;width:48px;height:50px;border:0;background:#fff;color:var(--sauce);cursor:pointer}
+.step button:hover{background:var(--mint)}
+.step input{width:84px;height:50px;border:0;border-left:1.5px solid var(--line);border-right:1.5px solid var(--line);text-align:center;font:inherit;font-size:19px;font-weight:600;color:var(--ink);-moz-appearance:textfield}
+.step input::-webkit-outer-spin-button,.step input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.range{display:flex;align-items:center;gap:16px}
+.range input[type=range]{flex:1;accent-color:var(--sauce)}
+.range output{font-weight:700;font-size:19px;min-width:64px;text-align:right}
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.chk{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;cursor:pointer;background:#fff}
+.chk:has(input:checked){border-color:var(--sauce);background:var(--mint)}
+.chk input{accent-color:var(--sauce);width:18px;height:18px;margin:3px 0 0;flex:none}
+.chk b{display:block;font-size:15.5px}
+.chk span{display:block;color:var(--muted);font-size:13.5px;line-height:1.35}
+.chk.is-locked{opacity:.75;cursor:default}
+.total{position:sticky;top:20px;background:var(--sauce);color:var(--cream);border-radius:24px;padding:28px 26px}
+.total .k{font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--butter)}
+.total .plan-name{font-family:var(--display);font-weight:800;font-size:34px;letter-spacing:-.025em;margin:4px 0 2px}
+.total .why{font-size:15px;color:rgba(247,243,236,.85);margin:0 0 18px;line-height:1.45}
+.lines{list-style:none;margin:0 0 16px;padding:0;font-size:15.5px}
+.lines li{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid rgba(247,243,236,.22)}
+.lines li span:last-child{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.sum{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-top:2px solid var(--cream);padding-top:14px}
+.sum b{font-family:var(--display);font-weight:800;font-size:46px;letter-spacing:-.03em;line-height:1}
+.sum span{font-size:15px;color:rgba(247,243,236,.85)}
+.yr{font-size:14.5px;color:rgba(247,243,236,.85);margin:8px 0 20px}
+.total .btn{width:100%}
+.total .note{font-size:13.5px;color:rgba(247,243,236,.75);margin:12px 0 0;line-height:1.45}
+.talk{background:rgba(243,210,122,.16);border-radius:14px;padding:12px 14px;font-size:15px;margin:0 0 16px}
+
+/* faq */
+.faq{margin-top:28px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px}
+.faq div{padding:20px 0;border-top:1px solid var(--line)}
+.faq h3{font-size:18px;margin:0 0 4px}
+.faq p{margin:0;color:var(--muted);font-size:16.5px}
+
+footer{background:var(--sauce-deep);color:rgba(247,243,236,.85);padding:28px 0;font-size:15px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap} footer a{color:var(--cream)}
+
+@media (max-width:1020px){ .plans{grid-template-columns:repeat(2,minmax(0,1fr))} .calc{grid-template-columns:minmax(0,1fr)} .total{position:static} }
+@media (max-width:760px){ .addons,.faq{grid-template-columns:minmax(0,1fr)} }
+@media (max-width:620px){
+  body{font-size:17px} .nav a:not(.btn):not(.signin){display:none} .nav{gap:18px}
+  .plans{grid-template-columns:minmax(0,1fr)} .checks{grid-template-columns:minmax(0,1fr)} section{padding:56px 0}
+  .plan .for,.per{min-height:0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="coat">
+  <div class="wrap top">
+    <a class="mark" href="/" aria-label="Nappé Studio, home">nappé <span>studio</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#inside">What's inside</a>
+      <a href="/#groups">For groups</a>
+      <a href="/pricing" aria-current="page">Pricing</a>
+      <a class="signin" href="https://app.nappestudio.com">Sign in</a>
+      <a class="btn btn-cream" href="/#demo">Request a demo</a>
+    </nav>
+  </div>
+  <div class="wrap intro">
+    <h1>Simple pricing, per location.</h1>
+    <p>Pick a plan, add what you need, and see your price before you talk to anyone. No setup fees.</p>
+  </div>
+  <svg class="drips" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 0H1440V24H1352V58Q1352 74 1338 74Q1324 74 1324 58V24H1196V40Q1196 52 1185 52Q1174 52 1174 40V24H792V74Q792 88 778 88Q764 88 764 74V24H548V50Q548 62 537 62Q526 62 526 50V24H212V66Q212 80 198 80Q184 80 184 66V24H0Z"/></svg>
+</header>
+
+<main id="main">
+
+<section id="plans" style="padding-top:20px">
+  <div class="wrap">
+    <h2 class="lede">Plans</h2>
+    <p class="sub">Prices are per location, per month. A location is one restaurant or bar with its own kitchen or service.</p>
+    <div class="bill" role="group" aria-label="Billing">
+      <button type="button" data-bill="month" aria-pressed="true">Monthly</button>
+      <button type="button" data-bill="year" aria-pressed="false">Yearly <small>2 months free</small></button>
+    </div>
+
+    <div class="plans">
+      <article class="plan">
+        <h3>Starter</h3>
+        <p class="for">One restaurant getting its specs and training in order.</p>
+        <div class="price" data-price="79">$79<small> /month</small></div>
+        <p class="per">1 location · up to 15 people</p>
+        <ul>
+          <li>Recipes and line builds, with photos and video</li>
+          <li>Learning Center: modules, tests, welcome tours</li>
+          <li>Menu Guide for front of house</li>
+          <li>English and Spanish</li>
+          <li>Print-ready spec sheets and cards</li>
+        </ul>
+        <a class="btn btn-line" href="#calc" data-plan="starter">Price it</a>
+      </article>
+      <article class="plan is-pop">
+        <span class="tag">Most kitchens</span>
+        <h3>Pro</h3>
+        <p class="for">The full studio for a single concept, one or two locations.</p>
+        <div class="price" data-price="179">$179<small> /month</small></div>
+        <p class="per">per location · 40 people included</p>
+        <ul>
+          <li class="plus">Everything in Starter</li>
+          <li>Ingredients, invoice reading and live plate costs</li>
+          <li>Daily Tools: station maps, line checks, shift notes, menus</li>
+          <li>Nutritionals and allergens</li>
+          <li>nappAI: answers, invoice reading, drafts</li>
+        </ul>
+        <a class="btn btn-sauce" href="#calc" data-plan="pro">Price it</a>
+      </article>
+      <article class="plan">
+        <h3>Group</h3>
+        <p class="for">Several concepts, or three or more locations.</p>
+        <div class="price" data-price="149">$149<small> /month</small></div>
+        <p class="per">per location · 3 location minimum · 40 people each</p>
+        <ul>
+          <li class="plus">Everything in Pro</li>
+          <li>Every concept in one account, each with its own specs</li>
+          <li>Switch between concepts and see the whole group</li>
+          <li>We load your existing specs when you start</li>
+          <li>Lower HR &amp; Compliance price</li>
+        </ul>
+        <a class="btn btn-line" href="#calc" data-plan="group">Price it</a>
+      </article>
+      <article class="plan">
+        <h3>Enterprise</h3>
+        <p class="for">Sixteen or more locations, or something custom.</p>
+        <div class="price">Let's talk</div>
+        <p class="per">volume pricing</p>
+        <ul>
+          <li class="plus">Everything in Group</li>
+          <li>CrunchTime connection included</li>
+          <li>HR &amp; Compliance included</li>
+          <li>Custom training and data import</li>
+          <li>A direct line to the team</li>
+        </ul>
+        <a class="btn btn-line" href="/#demo">Contact us</a>
+      </article>
+    </div>
+    <p class="sub" style="margin-top:18px;font-size:16px">More people than your plan includes? It's $2 a month for each extra person. Anyone with their own login counts as a person.</p>
+  </div>
+</section>
+
+<section id="addons" style="padding-top:0">
+  <div class="wrap">
+    <h2 class="lede">Add-ons</h2>
+    <div class="addons">
+      <div class="addon">
+        <h3>HR &amp; Compliance</h3>
+        <p class="ap">$39 per location / month ($29 on Group)</p>
+        <p>Harassment, safety, allergen and food safety training in English and Spanish, concern reporting, policy sign-offs, certification tracking, incident logs and training reports. Covers 40 people per location, then 75¢ a person.</p>
+      </div>
+      <div class="addon">
+        <h3>CrunchTime connection</h3>
+        <p class="ap">$49 / month per company</p>
+        <p>Brings your CrunchTime item prices and counts into Nappé Studio with your own CrunchTime account. Included on Enterprise.</p>
+      </div>
+      <div class="addon">
+        <h3>Yearly billing</h3>
+        <p class="ap">2 months free</p>
+        <p>Pay for the year up front and get twelve months for the price of ten. Works with any plan and add-on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="calc" class="calc-sec" aria-labelledby="calc-title">
+  <div class="wrap">
+    <h2 class="lede" id="calc-title">What would it cost you?</h2>
+    <p class="sub">Answer four questions. We pick the plan that fits and show every line of the price.</p>
+
+    <div class="calc">
+      <div class="qs">
+        <div class="q">
+          <label for="c-concepts">How many restaurant concepts do you run?</label>
+          <p class="hint">A concept is a brand with its own menu and recipes, like a taqueria and a cocktail bar.</p>
+          <div class="step"><button type="button" data-step="c-concepts" data-d="-1" aria-label="Fewer concepts">−</button><input id="c-concepts" type="number" min="1" max="99" value="1" inputmode="numeric"><button type="button" data-step="c-concepts" data-d="1" aria-label="More concepts">+</button></div>
+        </div>
+        <div class="q">
+          <label for="c-locs">How many locations in total?</label>
+          <p class="hint">Count every restaurant or bar. Two taquerias and a bar is three locations.</p>
+          <div class="step"><button type="button" data-step="c-locs" data-d="-1" aria-label="Fewer locations">−</button><input id="c-locs" type="number" min="1" max="999" value="1" inputmode="numeric"><button type="button" data-step="c-locs" data-d="1" aria-label="More locations">+</button></div>
+        </div>
+        <div class="q">
+          <label for="c-people">How many people would sign in?</label>
+          <p class="hint">Everyone who needs their own login: cooks, managers, servers, bartenders. Add the people across all locations.</p>
+          <div class="range"><input id="c-people" type="range" min="1" max="600" value="25" aria-describedby="c-people-out"><output id="c-people-out" for="c-people">25</output></div>
+        </div>
+        <fieldset class="q">
+          <legend>What do you want to use?</legend>
+          <p class="hint">Recipes, line builds, the Learning Center, the Menu Guide and Spanish come with every plan.</p>
+          <div class="checks">
+            <label class="chk"><input type="checkbox" data-feat="costing" checked><div><b>Food costing and invoices</b><span>Ingredient prices from your invoices, live plate costs</span></div></label>
+            <label class="chk"><input type="checkbox" data-feat="daily" checked><div><b>Daily Tools</b><span>Station maps, line checks, shift notes, menus</span></div></label>
+            <label class="chk"><input type="checkbox" data-feat="nutrition"><div><b>Nutritionals</b><span>Nutrition and allergen estimates</span></div></label>
+            <label class="chk"><input type="checkbox" data-feat="ai" checked><div><b>nappAI</b><span>Answers questions, reads invoices, drafts the Menu Guide</span></div></label>
+            <label class="chk"><input type="checkbox" data-add="hr"><div><b>HR &amp; Compliance</b><span>Add-on: training, reports, sign-offs, certifications</span></div></label>
+            <label class="chk"><input type="checkbox" data-add="ct"><div><b>CrunchTime connection</b><span>Add-on: your CrunchTime prices and counts</span></div></label>
+          </div>
+        </fieldset>
+        <div class="q">
+          <span class="hint" style="display:block;margin:0 0 6px;font-weight:700;color:var(--ink);font-size:17px">Billing</span>
+          <div class="bill" role="group" aria-label="Billing for the calculator" style="margin:0">
+            <button type="button" data-bill="month" aria-pressed="true">Monthly</button>
+            <button type="button" data-bill="year" aria-pressed="false">Yearly <small>2 months free</small></button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="total" aria-live="polite">
+        <div class="k">Your plan</div>
+        <div class="plan-name" id="t-plan">Pro</div>
+        <p class="why" id="t-why"></p>
+        <div class="talk" id="t-talk" hidden></div>
+        <ul class="lines" id="t-lines"></ul>
+        <div class="sum"><b id="t-sum">$0</b><span id="t-sum-per">per month</span></div>
+        <p class="yr" id="t-yr"></p>
+        <a class="btn btn-cream" id="t-cta" href="/#demo">Get started with a demo</a>
+        <p class="note">Prices in US dollars, before any sales tax. We'll confirm everything with you before anything is billed.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2 class="lede">Questions</h2>
+    <div class="faq">
+      <div><h3>What counts as a person?</h3><p>Anyone with their own login. A cook, a manager, a server who uses the Menu Guide. People who leave can be removed any time and stop counting.</p></div>
+      <div><h3>What's the difference between a concept and a location?</h3><p>A concept is a brand with its own menu and recipes. A location is a place it operates. One taqueria with three locations is one concept, three locations.</p></div>
+      <div><h3>Can I change plans later?</h3><p>Yes, up or down, any month. Your recipes, training records and settings stay exactly where they are.</p></div>
+      <div><h3>Is there a contract?</h3><p>Monthly plans can be canceled any time. Yearly plans are paid up front for twelve months, with two of them free.</p></div>
+      <div><h3>Do you help us get set up?</h3><p>Every plan comes with a welcome tour and training modules. On Group and Enterprise we load your existing recipes and line builds for you.</p></div>
+      <div><h3>Can I try it first?</h3><p><a href="https://app.nappestudio.com/?demo">Open the demo studio</a>. It signs you straight in with a sample restaurant group and a short guided tour.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Nappé Studio</span>
+    <span><a href="/">Home</a> &nbsp;·&nbsp; <a href="https://app.nappestudio.com">Sign in</a> &nbsp;·&nbsp; <a href="mailto:hello@nappestudio.com">hello@nappestudio.com</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // ---- the prices (change them here) ----
+  var P = {
+    starter: { name: 'Starter', price: 79, people: 15 },          // 1 location, up to 15 people
+    pro: { name: 'Pro', price: 179, peoplePerLoc: 40 },            // per location
+    group: { name: 'Group', price: 149, peoplePerLoc: 40, minLocs: 3 },
+    enterpriseFrom: 16,                                             // locations
+    extraPerson: 2,
+    hr: { perLoc: 39, groupPerLoc: 29, peoplePerLoc: 40, extraPerson: 0.75 },
+    ct: 49,
+    yearMonths: 10                                                  // a year costs 10 months
+  };
+  var bill = 'month';
+  var $ = function (id) { return document.getElementById(id); };
+  var money = function (n) { return '$' + (Math.round(n * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }); };
+  var num = function (id, min, max) { var v = parseInt($(id).value, 10); if (isNaN(v)) v = min; return Math.max(min, Math.min(max, v)); };
+
+  function calc() {
+    var concepts = num('c-concepts', 1, 99), locs = num('c-locs', 1, 999), people = num('c-people', 1, 600);
+    if (locs < concepts) { locs = concepts; $('c-locs').value = locs; }
+    $('c-people-out').textContent = people >= 600 ? '600+' : people;
+    var f = {}; document.querySelectorAll('[data-feat]').forEach(function (c) { f[c.dataset.feat] = c.checked; });
+    var add = {}; document.querySelectorAll('[data-add]').forEach(function (c) { add[c.dataset.add] = c.checked; });
+    var proFeature = f.costing || f.daily || f.nutrition || f.ai;
+
+    // the plan that fits
+    var plan, why;
+    if (locs >= P.enterpriseFrom) { plan = 'enterprise'; why = locs + ' locations is Enterprise size. Here is the estimate at Group pricing; Enterprise pricing is usually lower.'; }
+    else if (concepts >= 2 || locs >= P.group.minLocs) { plan = 'group'; why = concepts >= 2 ? 'More than one concept fits the Group plan.' : 'Three or more locations fits the Group plan.'; }
+    else if (proFeature || people > P.starter.people || locs > 1) {
+      plan = 'pro';
+      var r = []; if (proFeature) r.push('the features you picked'); if (people > P.starter.people) r.push('more than ' + P.starter.people + ' people'); if (locs > 1) r.push('a second location');
+      why = 'Pro, for ' + r.join(' and ') + '.';
+    } else { plan = 'starter'; why = 'Recipes, line builds, training and the Menu Guide for one restaurant.'; }
+
+    var lines = [], total = 0;
+    var line = function (label, amt) { lines.push([label, amt]); total += amt; };
+    if (plan === 'starter') line('Starter, 1 location', P.starter.price);
+    else {
+      var p = plan === 'pro' ? P.pro : P.group, billLocs = plan === 'group' || plan === 'enterprise' ? Math.max(locs, P.group.minLocs) : locs;
+      var unit = plan === 'pro' ? P.pro.price : P.group.price;
+      line((plan === 'pro' ? 'Pro' : 'Group') + ', ' + billLocs + ' location' + (billLocs === 1 ? '' : 's') + ' × ' + money(unit) + (billLocs > locs ? ' (3 minimum)' : ''), billLocs * unit);
+    }
+    var included = plan === 'starter' ? P.starter.people : locs * P.pro.peoplePerLoc;
+    var extra = Math.max(0, people - included);
+    if (extra) line(extra + ' more ' + (extra === 1 ? 'person' : 'people') + ' × ' + money(P.extraPerson), extra * P.extraPerson);
+    if (add.hr && plan !== 'enterprise') {
+      var per = plan === 'group' ? P.hr.groupPerLoc : P.hr.perLoc, hrExtra = Math.max(0, people - locs * P.hr.peoplePerLoc);
+      line('HR & Compliance, ' + locs + ' location' + (locs === 1 ? '' : 's') + (hrExtra ? ' + ' + hrExtra + ' people' : ''), locs * per + hrExtra * P.hr.extraPerson);
+    }
+    if (add.ct && plan !== 'enterprise') line('CrunchTime connection', P.ct);
+    if (plan === 'enterprise') { if (add.hr) lines.push(['HR & Compliance', 'Included']); if (add.ct) lines.push(['CrunchTime connection', 'Included']); }
+
+    $('t-plan').textContent = plan === 'enterprise' ? 'Enterprise' : P[plan].name;
+    $('t-why').textContent = why;
+    var talk = $('t-talk');
+    if (plan === 'enterprise') { talk.hidden = false; talk.textContent = 'With this many locations we set a custom price, usually below this estimate. Tell us about your group and we’ll send a quote.'; }
+    else talk.hidden = true;
+    $('t-lines').innerHTML = lines.map(function (l) { return '<li><span>' + l[0] + '</span><span>' + (typeof l[1] === 'number' ? money(l[1]) : l[1]) + '</span></li>'; }).join('');
+    var shown = bill === 'year' ? total * P.yearMonths / 12 : total;
+    $('t-sum').textContent = money(Math.round(shown * 100) / 100);
+    $('t-sum-per').textContent = bill === 'year' ? 'per month, billed yearly' : 'per month';
+    $('t-yr').textContent = bill === 'year' ? money(total * P.yearMonths) + ' a year, instead of ' + money(total * 12) + '.' : 'Or ' + money(total * P.yearMonths) + ' a year if you pay yearly (2 months free).';
+    $('t-cta').textContent = plan === 'enterprise' ? 'Ask for a quote' : 'Get started with a demo';
+    var est = $('t-plan').textContent + ' plan, ' + concepts + ' concept' + (concepts === 1 ? '' : 's') + ', ' + locs + ' location' + (locs === 1 ? '' : 's') + ', ' + people + ' people' +
+      (add.hr ? ', HR & Compliance' : '') + (add.ct ? ', CrunchTime' : '') + '. About ' + $('t-sum').textContent + ' ' + $('t-sum-per').textContent + '.';
+    $('t-cta').href = '/?est=' + encodeURIComponent(est) + '&locs=' + locs + '#demo';
+  }
+
+  // steppers, inputs, checkboxes
+  document.querySelectorAll('[data-step]').forEach(function (b) {
+    b.addEventListener('click', function () { var i = $(b.dataset.step); i.value = Math.max(+i.min, Math.min(+i.max, (parseInt(i.value, 10) || 0) + (+b.dataset.d))); if (b.dataset.step === 'c-locs' && +i.value < num('c-concepts', 1, 99)) $('c-concepts').value = i.value; calc(); });
+  });
+  ['c-concepts', 'c-locs', 'c-people'].forEach(function (id) { $(id).addEventListener('input', calc); });
+  document.querySelectorAll('[data-feat],[data-add]').forEach(function (c) { c.addEventListener('change', calc); });
+  // monthly / yearly (both switches stay in step, and the plan cards change too)
+  function setBill(b) {
+    bill = b;
+    document.querySelectorAll('[data-bill]').forEach(function (x) { x.setAttribute('aria-pressed', x.dataset.bill === b ? 'true' : 'false'); });
+    document.querySelectorAll('.price[data-price]').forEach(function (el) {
+      var m = +el.dataset.price, v = b === 'year' ? Math.round(m * P.yearMonths / 12) : m;
+      el.innerHTML = '$' + v + '<small> /month' + (b === 'year' ? ', billed yearly' : '') + '</small>';
+    });
+    calc();
+  }
+  document.querySelectorAll('[data-bill]').forEach(function (x) { x.addEventListener('click', function () { setBill(x.dataset.bill); }); });
+  // "Price it" on a plan card sets the calculator up for that plan
+  document.querySelectorAll('[data-plan]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var pl = a.dataset.plan, set = function (id, v) { $(id).value = v; };
+      var feats = document.querySelectorAll('[data-feat]');
+      if (pl === 'starter') { set('c-concepts', 1); set('c-locs', 1); set('c-people', 12); feats.forEach(function (c) { c.checked = false; }); }
+      if (pl === 'pro') { set('c-concepts', 1); set('c-locs', 1); set('c-people', 30); feats.forEach(function (c) { c.checked = c.dataset.feat !== 'nutrition'; }); }
+      if (pl === 'group') { set('c-concepts', 3); set('c-locs', 4); set('c-people', 140); feats.forEach(function (c) { c.checked = true; }); }
+      calc();
+    });
+  });
+  setBill('month');
+})();
+</script>
+</body>
+</html>

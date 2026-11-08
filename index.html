@@ -144,6 +144,7 @@ footer a{color:var(--cream)}
       <a href="#inside">What's inside</a>
       <a href="#groups">For groups</a>
       <a href="#made">Our story</a>
+      <a href="/pricing">Pricing</a>
       <a class="signin" href="https://app.nappestudio.com">Sign in</a>
       <a class="btn btn-cream" href="#demo">Request a demo</a>
     </nav>
@@ -240,7 +241,7 @@ footer a{color:var(--cream)}
       <h2 id="demo-title">See it with your own menu.</h2>
       <p>Tell us a little about your group and we'll walk you through the studio with a few of your own dishes loaded in.</p>
       <p>Rather look around on your own first? <a href="https://app.nappestudio.com/?demo">Open the demo studio</a>. It signs you straight in and gives you a short guided tour.</p>
-      <p>Prefer email? Write to <a href="mailto:hello@nappestudio.com">hello@nappestudio.com</a>.</p>
+      <p>Want to see prices first? <a href="/pricing">Price your setup</a>. Prefer email? Write to <a href="mailto:hello@nappestudio.com">hello@nappestudio.com</a>.</p>
     </div>
 
     <form id="demo-form" name="demo" method="POST" data-netlify="true" netlify-honeypot="bot-field">
@@ -268,7 +269,7 @@ footer a{color:var(--cream)}
 <footer>
   <div class="wrap">
     <span>© 2026 Nappé Studio</span>
-    <span><a href="https://app.nappestudio.com">Sign in</a> &nbsp;·&nbsp; <a href="mailto:hello@nappestudio.com">hello@nappestudio.com</a></span>
+    <span><a href="/pricing">Pricing</a> &nbsp;·&nbsp; <a href="https://app.nappestudio.com">Sign in</a> &nbsp;·&nbsp; <a href="mailto:hello@nappestudio.com">hello@nappestudio.com</a></span>
   </div>
 </footer>
 
@@ -278,6 +279,12 @@ footer a{color:var(--cream)}
   var status = document.getElementById('form-status');
   var host = location.hostname || '';
   var live = /nappestudio\.com$|netlify\.app$/.test(host);
+  // an estimate from the pricing page fills in the form
+  try {
+    var q = new URLSearchParams(location.search), est = q.get('est'), n = parseInt(q.get('locs'), 10);
+    if (est) document.getElementById('f-note').value = 'My estimate from the pricing page: ' + est.slice(0, 600);
+    if (n) document.getElementById('f-locs').value = n <= 1 ? '1' : n <= 5 ? '2 to 5' : n <= 15 ? '6 to 15' : '16 or more';
+  } catch (err) {}
   form.addEventListener('submit', function(e){
     if (live) {
       e.preventDefault();
@@ -287,7 +294,7 @@ footer a{color:var(--cream)}
         .then(function(r){
           if (!r.ok) throw new Error();
           form.reset();
-          status.textContent = 'Request sent. We'll be in touch soon.';
+          status.textContent = 'Request sent. We’ll be in touch soon.';
         })
         .catch(function(){
           status.textContent = 'That didn’t go through. Email hello@nappestudio.com and we will set it up.';

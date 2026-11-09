@@ -67,7 +67,7 @@ section{padding:72px 0}
 .plan li.plus::before{border:0;width:auto;height:auto;transform:none;content:"+";top:6px;left:3px;color:var(--sauce);font-weight:700}
 
 /* add-ons */
-.addons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:30px}
+.addons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:30px}
 .addon{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px}
 .addon h3{font-family:var(--display);font-weight:700;font-size:22px;margin:0 0 4px;letter-spacing:-.01em}
 .addon .ap{font-weight:700;color:var(--sauce);margin:0 0 8px;font-size:16.5px}
@@ -129,7 +129,7 @@ fieldset{border:0;margin:0;padding:0}
 footer{background:var(--sauce-deep);color:rgba(247,243,236,.85);padding:28px 0;font-size:15px}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap} footer a{color:var(--cream)}
 
-@media (max-width:1020px){ .plans{grid-template-columns:repeat(2,minmax(0,1fr))} .calc{grid-template-columns:minmax(0,1fr)} .total{position:static} }
+@media (max-width:1020px){ .plans,.addons{grid-template-columns:repeat(2,minmax(0,1fr))} .calc{grid-template-columns:minmax(0,1fr)} .total{position:static} }
 @media (max-width:760px){ .vol-grid,.addons,.faq{grid-template-columns:minmax(0,1fr)} }
 @media (max-width:620px){
   body{font-size:17px} .nav a:not(.btn):not(.signin):not(.keep){display:none} .nav{gap:18px}
@@ -196,8 +196,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <ul>
           <li class="plus">Everything in Starter</li>
           <li>Ingredients, invoice reading and live plate costs</li>
-          <li>Daily Tools: station maps, line checks, shift notes, menus, inventory counts</li>
-          <li>Nutritionals and allergens</li>
+          <li>Daily Tools: station maps, line checks, shift notes, menus</li>
+          <li>Inventory counts, prep lists and food cost reports</li>
+          <li>Nutrition and allergens</li>
           <li>nappAI: answers, invoice reading, drafts</li>
         </ul>
         <a class="btn btn-sauce" href="#calc" data-plan="pro">Price it</a>
@@ -224,7 +225,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <p class="per">volume pricing</p>
         <ul>
           <li class="plus">Everything in Group</li>
-          <li>CrunchTime connection included</li>
+          <li>CrunchTime or point-of-sale connection included</li>
           <li>HR &amp; Compliance included</li>
           <li>Optional done-for-you setup: we build your recipes, line builds and training for a one-time fee</li>
           <li>A direct line to the team</li>
@@ -269,6 +270,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <p>Brings your CrunchTime item prices and counts into Nappé Studio with your own CrunchTime account. Included on Enterprise.</p>
       </div>
       <div class="addon">
+        <h3>Point-of-sale connection</h3>
+        <p class="ap">Quoted per company</p>
+        <p>Sales flow in from your point of sale for food cost %. With dish sales, food cost reports compare what you should have used against what you did, item by item. Ask us about your system. Included on Enterprise.</p>
+      </div>
+      <div class="addon">
         <h3>Done-for-you setup</h3>
         <p class="ap">One-time fee, quoted with your plan</p>
         <p>For Enterprise and custom plans, we can build your studio for you: recipes and line builds from your existing files, photos, menus, station maps and training modules. Priced once, based on how much there is.</p>
@@ -309,8 +315,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <p class="hint">Recipes, line builds, the Learning Center, the Menu Guide and Spanish come with every plan.</p>
           <div class="checks">
             <label class="chk"><input type="checkbox" data-feat="costing" checked><div><b>Food costing and invoices</b><span>Ingredient prices from your invoices, live plate costs</span></div></label>
-            <label class="chk"><input type="checkbox" data-feat="daily" checked><div><b>Daily Tools</b><span>Station maps, line checks, shift notes, menus, inventory counts</span></div></label>
-            <label class="chk"><input type="checkbox" data-feat="nutrition"><div><b>Nutritionals</b><span>Nutrition and allergen estimates</span></div></label>
+            <label class="chk"><input type="checkbox" data-feat="daily" checked><div><b>Daily Tools</b><span>Station maps, line checks, shift notes, menus</span></div></label>
+            <label class="chk"><input type="checkbox" data-feat="inventory" checked><div><b>Inventory and food cost</b><span>Counts by weight, prep lists, food cost reports</span></div></label>
+            <label class="chk"><input type="checkbox" data-feat="nutrition"><div><b>Nutrition</b><span>Nutrition and allergen estimates</span></div></label>
             <label class="chk"><input type="checkbox" data-feat="ai" checked><div><b>nappAI</b><span>Answers questions, reads invoices, drafts the Menu Guide</span></div></label>
             <label class="chk"><input type="checkbox" data-add="hr"><div><b>HR &amp; Compliance</b><span>Add-on: training, reports, sign-offs, certifications</span></div></label>
             <label class="chk"><input type="checkbox" data-add="ct"><div><b>CrunchTime connection</b><span>Add-on: your CrunchTime prices and counts</span></div></label>
@@ -350,6 +357,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div><h3>Is there a contract?</h3><p>Monthly plans can be canceled any time. Yearly plans are paid up front for twelve months, with two of them free.</p></div>
       <div><h3>Do you help us get set up?</h3><p>Every plan comes with a welcome tour and training modules. On Group and Enterprise we load your existing recipes and line builds for you.</p></div>
       <div><h3>Can you set everything up for us?</h3><p>Yes. On Enterprise and custom plans we can build your recipes, line builds, menus, station maps and training for a one-time setup fee. Send us what you have and we’ll quote it with your plan.</p></div>
+      <div><h3>Does it connect to my point of sale?</h3><p>Food cost reports work today with sales typed in for each period. We also connect point-of-sale systems so sales come in on their own and dish sales show true food cost item by item. Tell us what you use and we'll quote it.</p></div>
       <div><h3>Can I try it first?</h3><p><a href="https://app.nappestudio.com/?demo">Open the demo studio</a>. It signs you straight in with a sample restaurant group and a short guided tour.</p></div>
     </div>
   </div>
@@ -392,7 +400,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     $('c-people-out').textContent = people >= 600 ? '600+' : people;
     var f = {}; document.querySelectorAll('[data-feat]').forEach(function (c) { f[c.dataset.feat] = c.checked; });
     var add = {}; document.querySelectorAll('[data-add]').forEach(function (c) { add[c.dataset.add] = c.checked; });
-    var proFeature = f.costing || f.daily || f.nutrition || f.ai;
+    var proFeature = f.costing || f.daily || f.inventory || f.nutrition || f.ai;
 
     // the plan that fits
     var plan, why;

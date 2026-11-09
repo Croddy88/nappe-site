@@ -138,10 +138,132 @@ footer a{color:var(--cream)}
   .drips{height:56px}
   .hero p{font-size:19px}
 }
+
+/* ---------- motion and the "What's inside" tabs ---------- */
+.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0) * 90ms)}
+.js .reveal.in{opacity:1;transform:none}
+.tabs{margin-top:56px;display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:44px;align-items:start}
+.tablist{position:relative;display:flex;flex-direction:column;gap:4px;border-left:2px solid var(--line);padding-left:6px}
+.tab{position:relative;display:flex;align-items:baseline;gap:14px;text-align:left;font:inherit;font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.015em;color:var(--muted);background:none;border:0;padding:14px 14px;border-radius:14px;cursor:pointer;transition:color .25s,background .25s}
+.tab:hover{color:var(--ink);background:rgba(47,93,80,.05)}
+.tab[aria-selected="true"]{color:var(--sauce);background:var(--paper)}
+.tab-n{font-family:var(--body);font-size:13px;font-weight:600;letter-spacing:.06em;color:var(--muted);opacity:.7;font-variant-numeric:tabular-nums}
+.tab[aria-selected="true"] .tab-n{color:var(--sauce);opacity:1}
+.tab::after{content:"";position:absolute;left:14px;right:14px;bottom:8px;height:2px;border-radius:2px;background:var(--sauce);transform:scaleX(0);transform-origin:left;opacity:.35}
+.tabs.auto .tab[aria-selected="true"]::after{animation:tabprog var(--dur,7s) linear forwards}
+@keyframes tabprog{to{transform:scaleX(1)}}
+.tab-bar{position:absolute;left:-2px;top:0;width:2px;height:0;background:var(--sauce);border-radius:2px;transition:transform .45s cubic-bezier(.3,.7,.2,1),height .45s cubic-bezier(.3,.7,.2,1)}
+.panels{position:relative;min-height:420px}
+.panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
+.panel[hidden]{display:none}
+.panel .mods{grid-template-columns:minmax(0,1fr);gap:20px}
+.panel .mods dt{font-size:18.5px}
+.panel .mods dd{font-size:16.5px}
+section{scroll-margin-top:64px}
+.panel.is-on .mods > div,.panel.is-on .mock{animation:rise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 70ms)}
+.panel.is-on .mock{animation-delay:.15s}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+/* the small screens beside each list */
+.mock{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 24px 50px -32px rgba(10,30,24,.45);position:sticky;top:96px}
+.mock-head{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted);margin-bottom:8px}
+.mock-t{font-family:var(--display);font-weight:700;font-size:23px;letter-spacing:-.02em;line-height:1.15;margin-bottom:12px}
+.mock-rows{list-style:none;margin:0 0 12px;padding:0}
+.mock-rows li{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid var(--line);font-size:15.5px}
+.mock-rows b{font-variant-numeric:tabular-nums}
+.panel.is-on .mock-rows li{animation:rise .5s both;animation-delay:calc(.3s + var(--i,0) * 110ms)}
+.mock-cost{display:flex;justify-content:space-between;align-items:baseline;background:#EEF3F0;border-radius:12px;padding:10px 14px;font-size:15px}
+.mock-cost b{font-family:var(--display);font-size:22px;color:var(--sauce);font-variant-numeric:tabular-nums}
+.mock-86{display:flex;align-items:center;gap:10px;background:#FBE9E6;border:1px solid #F0C4BC;border-radius:12px;padding:9px 12px;font-weight:600;font-size:15px;margin-bottom:14px}
+.mock-86 em{font-weight:400;color:var(--muted)}
+.tag86{background:#B3261E;color:#fff;font-weight:800;font-size:12px;border-radius:6px;padding:2px 7px}
+.panel.is-on .mock-86{animation:pop .5s .5s both}
+@keyframes pop{0%{opacity:0;transform:scale(.92)}70%{transform:scale(1.03)}100%{opacity:1;transform:none}}
+.mock-say{font-style:italic;color:var(--muted);font-size:16px;margin:0 0 14px;max-width:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:13px;font-weight:600;border-radius:999px;padding:4px 10px;background:#F6E3DF;color:#8A2B1F}
+.chips span.ok{background:#E3EFE8;color:var(--sauce)}
+.grid-check{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0 14px}
+.grid-check i{aspect-ratio:1.5;border-radius:10px;border:1.5px solid var(--line);background:#fff;position:relative}
+.grid-check i.ok{background:#E3EFE8;border-color:#B9D4C6}
+.grid-check i.bad{background:#FBE9E6;border-color:#F0C4BC}
+.grid-check i.ok::after,.grid-check i.bad::after{content:"";position:absolute;inset:0;margin:auto;width:14px;height:8px;border-left:2.5px solid var(--sauce);border-bottom:2.5px solid var(--sauce);transform:translateY(-2px) rotate(-45deg)}
+.grid-check i.bad::after{width:3px;height:14px;border:0;background:#B3261E;border-radius:2px;transform:none;box-shadow:0 18px 0 -0px transparent}
+.panel.is-on .grid-check i{animation:pop .4s both;animation-delay:calc(.25s + var(--i,0) * 70ms)}
+.mock-note{font-size:14.5px;background:#F1ECE2;border-radius:12px;padding:10px 12px;line-height:1.45}
+.mock-note.up{background:#FBF1D8}
+.big{display:flex;align-items:baseline;gap:10px;margin:4px 0 14px}
+.big b{font-family:var(--display);font-size:54px;letter-spacing:-.04em;color:var(--sauce);line-height:1;font-variant-numeric:tabular-nums}
+.big span{color:var(--muted);font-size:15px}
+.bars{display:grid;gap:8px;margin-bottom:14px}
+.bars i{display:block;height:10px;border-radius:6px;background:linear-gradient(90deg,var(--sauce),#5E8F7F);width:var(--w);transform-origin:left}
+.panel.is-on .bars i{animation:grow .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(.3s + var(--i,0) * 120ms)}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.lang{display:inline-flex;background:#EFEAE1;border-radius:999px;padding:3px;margin-bottom:14px}
+.lang span{font-weight:700;font-size:13px;padding:5px 12px;border-radius:999px;color:var(--muted);transition:background .3s,color .3s}
+.lang span.is-on{background:var(--sauce);color:var(--cream)}
+.flip{position:relative;min-height:84px;margin-bottom:14px}
+.flip p{position:absolute;inset:0;margin:0;font-family:var(--display);font-weight:700;font-size:20px;line-height:1.25;letter-spacing:-.015em;transition:opacity .5s,transform .5s;max-width:none}
+.flip p.f-es{opacity:0;transform:translateY(8px)}
+.flip.es p.f-en{opacity:0;transform:translateY(-8px)}
+.flip.es p.f-es{opacity:1;transform:none}
+.mock-ask{display:flex;flex-direction:column;gap:8px;font-size:15px}
+.mock-ask span{align-self:flex-end;background:#EFEAE1;border-radius:14px 14px 4px 14px;padding:8px 12px}
+.mock-ask b{align-self:flex-start;background:var(--sauce);color:var(--cream);font-weight:500;border-radius:14px 14px 14px 4px;padding:8px 12px}
+/* hero: rows arrive one by one, the card leans with the mouse */
+.card{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.js .card .rows li{animation:rise .55s both;animation-delay:calc(.5s + var(--i,0) * 120ms)}
+.js .card .tip{animation:rise .6s 1.05s both}
+.js .hero h1,.js .hero p,.js .hero .ctas{animation:rise .8s both}
+.js .hero p{animation-delay:.12s}.js .hero .ctas{animation-delay:.22s}
+/* the quote, a word at a time */
+.made blockquote .w{display:inline-block;opacity:.12;transition:opacity .5s;transition-delay:calc(var(--i,0) * 55ms)}
+.made blockquote.in .w{opacity:1}
+/* a slim bar that drops in once you scroll past the top */
+.mini{position:fixed;inset:0 0 auto 0;z-index:20;background:rgba(47,93,80,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--cream);transform:translateY(-100%);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.mini.show{transform:none}
+.mini .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:62px}
+.mini .mark{font-size:22px;color:var(--cream)}
+.mini nav{display:flex;align-items:center;gap:22px}
+.mini nav a{color:var(--cream);text-decoration:none;font-weight:500;font-size:15px}
+.mini nav a.on{text-decoration:underline;text-underline-offset:5px}
+.mini .btn{padding:10px 18px;font-size:14.5px}
+@media (max-width:900px){
+  .tabs{grid-template-columns:minmax(0,1fr);gap:24px}
+  .tablist{flex-direction:row;flex-wrap:wrap;border-left:0;padding-left:0;gap:8px}
+  .tab{font-size:16px;padding:10px 16px;border-radius:999px;border:1.5px solid var(--line);background:transparent;gap:8px}
+  .tab[aria-selected="true"]{background:var(--sauce);color:var(--cream);border-color:var(--sauce)}
+  .tab[aria-selected="true"] .tab-n{color:var(--cream)}
+  .tab::after,.tab-bar{display:none}
+  .panel{grid-template-columns:minmax(0,1fr);gap:28px}
+  .mock{position:relative;top:0;max-width:420px;order:-1}
+  .panels{min-height:0}
+}
+@media (max-width:620px){
+  .panel .mods{grid-template-columns:minmax(0,1fr)}
+  .mini nav a:not(.btn){display:none}
+  .tab-n{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .js .reveal{opacity:1;transform:none;transition:none}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;transition-duration:.001ms!important}
+  .made blockquote .w{opacity:1}
+}
 </style>
+<script>document.documentElement.className+=' js'</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="mini" id="mini" aria-hidden="true">
+  <div class="wrap">
+    <a class="mark" href="#" tabindex="-1">nappé <span>studio</span></a>
+    <nav aria-label="Quick">
+      <a href="#inside" tabindex="-1">What's inside</a>
+      <a href="#groups" tabindex="-1">For groups</a>
+      <a href="/pricing" tabindex="-1">Pricing</a>
+      <a class="btn btn-cream" href="#demo" tabindex="-1">Request a demo</a>
+    </nav>
+  </div>
+</div>
 
 <header class="coat">
   <div class="wrap top">
@@ -188,50 +310,102 @@ footer a{color:var(--cream)}
     <h2 class="lede">Everything your kitchen writes down, in one studio.</h2>
     <p class="sub">Specs stop living in binders, group texts and somebody's memory. Each team sees the part of the studio it needs.</p>
 
-    <div class="groups">
-      <div class="group">
-        <h3>Back of house</h3>
-        <dl class="mods">
-          <div><dt>Recipes</dt><dd>Written in grams, with photos and video for the steps that matter.</dd></div>
-          <div><dt>Line builds</dt><dd>Station-by-station plating specs a cook can follow in the middle of service.</dd></div>
-          <div><dt>Ingredients and plate costs</dt><dd>Upload or email an invoice and the studio reads it for you, keeping ingredient prices and every plate cost current.</dd></div>
-          <div><dt>Nutrition</dt><dd>A nutrition label and allergen estimates on every recipe and line build, built from its ingredients and ready for your team to check.</dd></div>
-          <div><dt>Print-ready specs</dt><dd>Recipe sheets and line build cards formatted for the binder, the pass or the walk-in door.</dd></div>
-        </dl>
+    <div class="tabs reveal" data-tabs>
+      <div class="tablist" role="tablist" aria-label="What's inside">
+        <button role="tab" id="t-boh" aria-controls="p-boh" aria-selected="true" class="tab"><span class="tab-n">01</span>Back of house</button>
+        <button role="tab" id="t-foh" aria-controls="p-foh" aria-selected="false" tabindex="-1" class="tab"><span class="tab-n">02</span>Front of house</button>
+        <button role="tab" id="t-shift" aria-controls="p-shift" aria-selected="false" tabindex="-1" class="tab"><span class="tab-n">03</span>Every shift</button>
+        <button role="tab" id="t-inv" aria-controls="p-inv" aria-selected="false" tabindex="-1" class="tab"><span class="tab-n">04</span>Inventory and food cost</button>
+        <button role="tab" id="t-all" aria-controls="p-all" aria-selected="false" tabindex="-1" class="tab"><span class="tab-n">05</span>Across the studio</button>
+        <span class="tab-bar" aria-hidden="true"><i></i></span>
       </div>
-      <div class="group">
-        <h3>Front of house</h3>
-        <dl class="mods">
-          <div><dt>Menu guide</dt><dd>Dish descriptions, allergens and talking points for servers, drafted for you and approved by a manager.</dd></div>
-          <div><dt>The right view for each role</dt><dd>Servers, hosts and bartenders see the menu guide. Your recipes and costs stay in the kitchen.</dd></div>
-        </dl>
-      </div>
-      <div class="group">
-        <h3>Every shift</h3>
-        <dl class="mods">
-          <div><dt>Learning center</dt><dd>Training modules with video and tests, a welcome tour for new hires, and a record of who finished what.</dd></div>
-          <div><dt>Daily tools</dt><dd>Station maps, line checks, shift notes and your menus, linked to the line build behind each dish, on the phone already in their pocket.</dd></div>
-        </dl>
-      </div>
-        <div class="group">
-          <h3>Inventory and food cost</h3>
+
+      <div class="panels">
+        <div role="tabpanel" id="p-boh" aria-labelledby="t-boh" class="panel is-on">
+          <dl class="mods">
+            <div><dt>Recipes</dt><dd>Written in grams, with photos and video for the steps that matter.</dd></div>
+            <div><dt>Line builds</dt><dd>Station-by-station plating specs a cook can follow in the middle of service.</dd></div>
+            <div><dt>Ingredients and plate costs</dt><dd>Upload or email an invoice and the studio reads it for you, keeping ingredient prices and every plate cost current.</dd></div>
+            <div><dt>Nutrition</dt><dd>A nutrition label and allergen estimates on every recipe and line build, built from its ingredients and ready for your team to check.</dd></div>
+            <div><dt>Print-ready specs</dt><dd>Recipe sheets and line build cards formatted for the binder, the pass or the walk-in door.</dd></div>
+          </dl>
+          <div class="mock" aria-hidden="true">
+            <div class="mock-head"><span>Prep recipe</span><span class="pill">Garde manger</span></div>
+            <div class="mock-t">Salsa verde</div>
+            <ul class="mock-rows">
+              <li><span>Tomatillo, roasted</span><b>900 g</b></li>
+              <li><span>Serrano</span><b>40 g</b></li>
+              <li><span>Cilantro</span><b>60 g</b></li>
+              <li><span>Lime juice</span><b>45 g</b></li>
+            </ul>
+            <div class="mock-cost"><span>Batch cost</span><b data-count="7.84" data-pre="$">$7.84</b></div>
+          </div>
+        </div>
+
+        <div role="tabpanel" id="p-foh" aria-labelledby="t-foh" class="panel" hidden>
+          <dl class="mods">
+            <div><dt>Menu guide</dt><dd>Dish descriptions, allergens and talking points for servers, drafted for you and approved by a manager.</dd></div>
+            <div><dt>The right view for each role</dt><dd>Servers, hosts and bartenders see the menu guide. Your recipes and costs stay in the kitchen.</dd></div>
+            <div><dt>Today's 86 list</dt><dd>What's out tonight sits at the top of the menu guide, and the dish is marked, so nobody sells the last halibut twice.</dd></div>
+            <div><dt>Pre-shift notes</dt><dd>Features, VIPs and what to push, written once by the chef and on every server's phone before lineup.</dd></div>
+          </dl>
+          <div class="mock" aria-hidden="true">
+            <div class="mock-86"><span class="tag86">86</span> Halibut <em>(back tomorrow)</em></div>
+            <div class="mock-t">Hanger steak frites</div>
+            <p class="mock-say">"Grilled to order, with hand-cut fries and a bright chimichurri."</p>
+            <div class="chips"><span>Dairy</span><span>Allium</span><span class="ok">Gluten free</span></div>
+          </div>
+        </div>
+
+        <div role="tabpanel" id="p-shift" aria-labelledby="t-shift" class="panel" hidden>
+          <dl class="mods">
+            <div><dt>Learning center</dt><dd>Training modules with video and tests, a welcome tour for new hires, and a record of who finished what.</dd></div>
+            <div><dt>Daily tools</dt><dd>Station maps, line checks, shift notes and your menus, linked to the line build behind each dish, on the phone already in their pocket.</dd></div>
+            <div><dt>Notifications</dt><dd>The 86 list, pre-shift notes, count reminders and big price changes, sent to the phones of the people who need them.</dd></div>
+          </dl>
+          <div class="mock" aria-hidden="true">
+            <div class="mock-head"><span>Line check</span><span class="pill">Sauté</span></div>
+            <div class="grid-check">
+              <i class="ok"></i><i class="ok"></i><i class="ok"></i><i class="ok"></i>
+              <i class="ok"></i><i class="bad"></i><i class="ok"></i><i class="ok"></i>
+              <i class="ok"></i><i class="ok"></i><i class="ok"></i><i></i>
+            </div>
+            <div class="mock-note">Beurre blanc broke at 5:40. Remade, 160°F.</div>
+          </div>
+        </div>
+
+        <div role="tabpanel" id="p-inv" aria-labelledby="t-inv" class="panel" hidden>
           <dl class="mods">
             <div><dt>Counts by weight</dt><dd>Count area by area on a phone, with several people at once. The studio and nappAI point out numbers that look wrong before a chef closes the count at your last invoice prices.</dd></div>
             <div><dt>Prep counts and prep lists</dt><dd>A quick daily count of what's already made, checked against pars that change by day, turns into the prep list for the shift.</dd></div>
             <div><dt>Food cost reports</dt><dd>Opening inventory, plus purchases from your invoices, minus closing inventory, for every period between counts. Food and beverage cost, by category, against your sales.</dd></div>
+            <div><dt>Price changes</dt><dd>When an invoice moves a price, see every dish it reaches and what each plate costs now, before it shows up in your month.</dd></div>
             <div><dt>Waste, orders and transfers</dt><dd>Log waste with a reason, get an order guide by vendor from your pars, and move product between concepts or locations without throwing off anyone's food cost.</dd></div>
             <div><dt>Connect your point of sale</dt><dd>Ask us about syncing your point of sale. Sales come in on their own, and with dish sales the studio can compare what you should have used with what you did: true food cost, item by item.</dd></div>
           </dl>
+          <div class="mock" aria-hidden="true">
+            <div class="mock-head"><span>Food cost</span><span class="pill">October</span></div>
+            <div class="big"><b data-count="28.4" data-suf="%">28.4%</b><span>of food sales</span></div>
+            <div class="bars"><i style="--w:62%"></i><i style="--w:48%"></i><i style="--w:71%"></i><i style="--w:38%"></i></div>
+            <div class="mock-note up">Avocado +18% on Tuesday's invoice. Guacamole now $0.81 more a plate.</div>
+          </div>
         </div>
-        <div class="group">
-          <h3>Across the studio</h3>
+
+        <div role="tabpanel" id="p-all" aria-labelledby="t-all" class="panel" hidden>
           <dl class="mods">
             <div><dt>English and Spanish</dt><dd>One tap switches the whole studio, recipes and training included. New specs are translated as soon as they're saved.</dd></div>
             <div><dt>nappAI</dt><dd>Ask how a dish is built or what a plate costs and get an answer from your own specs. It reads invoices and drafts the menu guide too.</dd></div>
             <div><dt>Every change on record</dt><dd>See who changed a spec and when, jump straight to the change, and undo it in one click.</dd></div>
+            <div><dt>Your data is yours</dt><dd>Export everything, any time: specs, costs, training records and files, in formats any spreadsheet opens.</dd></div>
             <div><dt>Add-ons when you need them</dt><dd>HR &amp; Compliance (launching soon) for harassment and safety training, concern reporting, sign-offs and certifications. A CrunchTime or point-of-sale connection.</dd></div>
           </dl>
+          <div class="mock" aria-hidden="true">
+            <div class="lang"><span class="is-on">EN</span><span>ES</span></div>
+            <div class="flip"><p class="f-en">Nappe the plate with beurre blanc before the fish goes down.</p><p class="f-es">Napa el plato con beurre blanc antes de poner el pescado.</p></div>
+            <div class="mock-ask"><span>How much salmon goes on the plate?</span><b>170 g, skin side up.</b></div>
+          </div>
         </div>
+      </div>
     </div>
   </div>
 </section>
@@ -345,6 +519,94 @@ footer a{color:var(--cream)}
       status.textContent = 'This is a preview. On nappestudio.com, this button sends the request to your inbox.';
     }
   });
+})();
+</script>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // stagger numbers for lists that animate in
+  function stagger(sel){ document.querySelectorAll(sel).forEach(function(el){ Array.prototype.forEach.call(el.children, function(c, i){ c.style.setProperty('--i', i); }); }); }
+  stagger('.mods'); stagger('.mock-rows'); stagger('.grid-check'); stagger('.bars'); stagger('.rows');
+  // things that rise into view as you scroll
+  var auto = ['section .lede', 'section .sub', '.points li', '.promise-list li', '#price-promise .btn', '.made p', '#demo .demo-inner > div > *', '#demo form'];
+  auto.forEach(function(sel){ var n = 0, last = null; document.querySelectorAll(sel).forEach(function(el){ if (el.parentNode !== last) { n = 0; last = el.parentNode; } el.classList.add('reveal'); el.style.setProperty('--i', n++); }); });
+  // the quote, word by word
+  var q = document.querySelector('.made blockquote');
+  if (q) { q.innerHTML = q.textContent.trim().split(/\s+/).map(function(w, i){ return '<span class="w" style="--i:' + i + '">' + w + '</span>'; }).join(' '); q.classList.add('reveal-words'); }
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px', threshold: .12 }) : null;
+  document.querySelectorAll('.reveal, .reveal-words').forEach(function(el){ if (io && !reduce) io.observe(el); else el.classList.add('in'); });
+
+  // count up a number when its panel opens
+  function countUp(el){
+    var to = parseFloat(el.getAttribute('data-count')), pre = el.getAttribute('data-pre') || '', suf = el.getAttribute('data-suf') || '', dec = (String(to).split('.')[1] || '').length;
+    if (reduce) { el.textContent = pre + to.toFixed(dec) + suf; return; }
+    var t0 = null; function step(t){ if (!t0) t0 = t; var k = Math.min(1, (t - t0) / 1100), e = 1 - Math.pow(1 - k, 3); el.textContent = pre + (to * e).toFixed(dec) + suf; if (k < 1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  // English and Spanish, back and forth
+  var flipT = null;
+  function langLoop(panel){
+    clearInterval(flipT); var f = panel.querySelector('.flip'), l = panel.querySelectorAll('.lang span'); if (!f) return;
+    flipT = setInterval(function(){ var es = !f.classList.contains('es'); f.classList.toggle('es', es); l[0].classList.toggle('is-on', !es); l[1].classList.toggle('is-on', es); }, 2600);
+  }
+
+  // the tabs
+  var box = document.querySelector('[data-tabs]');
+  if (box) {
+    var tabs = Array.prototype.slice.call(box.querySelectorAll('[role=tab]')), bar = box.querySelector('.tab-bar'), timer = null, user = false, seen = false, DUR = 7000;
+    box.style.setProperty('--dur', DUR + 'ms');
+    function moveBar(t){ if (!bar) return; bar.style.height = t.offsetHeight + 'px'; bar.style.transform = 'translateY(' + t.offsetTop + 'px)'; }
+    function show(t, focus){
+      tabs.forEach(function(x){
+        var on = x === t, p = document.getElementById(x.getAttribute('aria-controls'));
+        x.setAttribute('aria-selected', on ? 'true' : 'false'); x.tabIndex = on ? 0 : -1;
+        if (on) { p.hidden = false; p.classList.remove('is-on'); void p.offsetWidth; p.classList.add('is-on'); p.querySelectorAll('[data-count]').forEach(countUp); langLoop(p); }
+        else { p.hidden = true; p.classList.remove('is-on'); }
+      });
+      // restart the progress line on the tab
+      box.classList.remove('auto'); void box.offsetWidth;
+      moveBar(t); if (focus) t.focus();
+      schedule();
+    }
+    function schedule(){ clearTimeout(timer); if (user || reduce || !seen) { box.classList.remove('auto'); return; } box.classList.add('auto'); timer = setTimeout(function(){ var i = tabs.indexOf(box.querySelector('[aria-selected=true]')); show(tabs[(i + 1) % tabs.length]); }, DUR); }
+    function stop(){ user = true; schedule(); }
+    tabs.forEach(function(t, i){
+      t.addEventListener('click', function(){ stop(); show(t); });
+      t.addEventListener('keydown', function(e){
+        var k = e.key, j = null;
+        if (k === 'ArrowDown' || k === 'ArrowRight') j = (i + 1) % tabs.length; else if (k === 'ArrowUp' || k === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length; else if (k === 'Home') j = 0; else if (k === 'End') j = tabs.length - 1;
+        if (j !== null) { e.preventDefault(); stop(); show(tabs[j], true); }
+      });
+    });
+    box.addEventListener('pointerenter', function(){ if (window.matchMedia('(hover:hover)').matches) { box.classList.remove('auto'); clearTimeout(timer); } });
+    box.addEventListener('pointerleave', function(){ schedule(); });
+    // play through the tabs on their own only while they're on screen
+    if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ seen = es[0].isIntersecting; if (seen) schedule(); else { clearTimeout(timer); box.classList.remove('auto'); } }, { threshold: .35 }).observe(box);
+    window.addEventListener('resize', function(){ moveBar(box.querySelector('[aria-selected=true]')); });
+    show(tabs[0]);
+  }
+
+  // hero card leans toward the mouse
+  var card = document.querySelector('.hero .card');
+  if (card && !reduce && window.matchMedia('(hover:hover)').matches) {
+    var hero = document.querySelector('.hero');
+    hero.addEventListener('pointermove', function(e){ var r = card.getBoundingClientRect(), x = (e.clientX - r.left - r.width / 2) / r.width, y = (e.clientY - r.top - r.height / 2) / r.height; card.style.transform = 'rotate(-2.5deg) perspective(900px) rotateY(' + (x * 6).toFixed(2) + 'deg) rotateX(' + (-y * 6).toFixed(2) + 'deg) translateY(-4px)'; });
+    hero.addEventListener('pointerleave', function(){ card.style.transform = ''; });
+  }
+
+  // the slim bar after the top, and which section you're in
+  var mini = document.getElementById('mini'), top = document.querySelector('header.coat');
+  if (mini && top) {
+    var links = mini.querySelectorAll('nav a[href^="#"]');
+    function onScroll(){
+      var show = top.getBoundingClientRect().bottom < 0;
+      if (mini.classList.contains('show') !== show) { mini.classList.toggle('show', show); mini.setAttribute('aria-hidden', show ? 'false' : 'true'); mini.querySelectorAll('a').forEach(function(a){ a.tabIndex = show ? 0 : -1; }); }
+      var cur = ''; ['inside', 'groups'].forEach(function(id){ var el = document.getElementById(id); if (el) { var r = el.getBoundingClientRect(); if (r.top < 140 && r.bottom > 140) cur = id; } });
+      links.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + cur); });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  }
 })();
 </script>
 </body>

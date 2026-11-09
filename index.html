@@ -201,11 +201,9 @@ section{scroll-margin-top:64px}
 .lang{display:inline-flex;background:#EFEAE1;border-radius:999px;padding:3px;margin-bottom:14px}
 .lang span{font-weight:700;font-size:13px;padding:5px 12px;border-radius:999px;color:var(--muted);transition:background .3s,color .3s}
 .lang span.is-on{background:var(--sauce);color:var(--cream)}
-.flip{position:relative;min-height:84px;margin-bottom:14px}
-.flip p{position:absolute;inset:0;margin:0;font-family:var(--display);font-weight:700;font-size:20px;line-height:1.25;letter-spacing:-.015em;transition:opacity .5s,transform .5s;max-width:none}
-.flip p.f-es{opacity:0;transform:translateY(8px)}
-.flip.es p.f-en{opacity:0;transform:translateY(-8px)}
-.flip.es p.f-es{opacity:1;transform:none}
+.flip{transition:opacity .35s ease,transform .35s ease}
+.flip.out{opacity:0;transform:translateY(6px)}
+.flip > p{margin:0 0 16px;font-family:var(--display);font-weight:700;font-size:20px;line-height:1.25;letter-spacing:-.015em;max-width:none;min-height:3.75em}
 .mock-ask{display:flex;flex-direction:column;gap:8px;font-size:15px}
 .mock-ask span{align-self:flex-end;background:#EFEAE1;border-radius:14px 14px 4px 14px;padding:8px 12px}
 .mock-ask b{align-self:flex-start;background:var(--sauce);color:var(--cream);font-weight:500;border-radius:14px 14px 14px 4px;padding:8px 12px}
@@ -401,8 +399,13 @@ section{scroll-margin-top:64px}
           </dl>
           <div class="mock" aria-hidden="true">
             <div class="lang"><span class="is-on">EN</span><span>ES</span></div>
-            <div class="flip"><p class="f-en">Nappe the plate with beurre blanc before the fish goes down.</p><p class="f-es">Napa el plato con beurre blanc antes de poner el pescado.</p></div>
-            <div class="mock-ask"><span>How much salmon goes on the plate?</span><b>170 g, skin side up.</b></div>
+            <div class="flip">
+              <p class="tr" data-en="Nappe the plate with beurre blanc before the fish goes down." data-es="Napa el plato con beurre blanc antes de poner el pescado.">Nappe the plate with beurre blanc before the fish goes down.</p>
+              <div class="mock-ask">
+                <span class="tr" data-en="How much salmon goes on the plate?" data-es="¿Cuánto salmón va en el plato?">How much salmon goes on the plate?</span>
+                <b class="tr" data-en="170 g, skin side up." data-es="170 g, con la piel hacia arriba.">170 g, skin side up.</b>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -548,7 +551,13 @@ section{scroll-margin-top:64px}
   var flipT = null;
   function langLoop(panel){
     clearInterval(flipT); var f = panel.querySelector('.flip'), l = panel.querySelectorAll('.lang span'); if (!f) return;
-    flipT = setInterval(function(){ var es = !f.classList.contains('es'); f.classList.toggle('es', es); l[0].classList.toggle('is-on', !es); l[1].classList.toggle('is-on', es); }, 2600);
+    var es = false; f.classList.remove('out'); f.querySelectorAll('.tr').forEach(function(el){ el.textContent = el.getAttribute('data-en'); }); l[0].classList.add('is-on'); l[1].classList.remove('is-on');
+    flipT = setInterval(function(){
+      es = !es; l[0].classList.toggle('is-on', !es); l[1].classList.toggle('is-on', es);
+      // fade the whole card out, switch every line, fade it back in (never two languages on top of each other)
+      f.classList.add('out');
+      setTimeout(function(){ f.querySelectorAll('.tr').forEach(function(el){ el.textContent = el.getAttribute(es ? 'data-es' : 'data-en'); }); f.classList.remove('out'); }, 360);
+    }, 3200);
   }
 
   // the tabs

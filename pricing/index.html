@@ -70,6 +70,9 @@ section{padding:72px 0}
 .addons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:30px}
 .addon{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px}
 .addon h3{font-family:var(--display);font-weight:700;font-size:22px;margin:0 0 4px;letter-spacing:-.01em}
+.addon{position:relative}
+.soon{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;background:var(--butter);color:var(--ink);padding:3px 10px;border-radius:999px;margin-bottom:8px}
+.soon-i{font-style:normal;font-size:11.5px;font-weight:700;background:var(--butter);color:var(--ink);padding:1px 7px;border-radius:999px;margin-left:4px;white-space:nowrap}
 .addon .ap{font-weight:700;color:var(--sauce);margin:0 0 8px;font-size:16.5px}
 .addon p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.5}
 
@@ -214,7 +217,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <li>Switch between concepts and see the whole group</li>
           <li>We load your existing specs when you start</li>
           <li>Volume pricing as you grow (below)</li>
-          <li>Lower HR &amp; Compliance price</li>
+          <li>Lower HR &amp; Compliance price (launching soon)</li>
         </ul>
         <a class="btn btn-line" href="#calc" data-plan="group">Price it</a>
       </article>
@@ -226,7 +229,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <ul>
           <li class="plus">Everything in Group</li>
           <li>CrunchTime or point-of-sale connection included</li>
-          <li>HR &amp; Compliance included</li>
+          <li>HR &amp; Compliance included (launching soon)</li>
           <li>Optional done-for-you setup: we build your recipes, line builds and training for a one-time fee</li>
           <li>A direct line to the team</li>
         </ul>
@@ -260,9 +263,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <h2 class="lede">Add-ons</h2>
     <div class="addons">
       <div class="addon">
+        <span class="soon">Launching soon</span>
         <h3>HR &amp; Compliance</h3>
-        <p class="ap">$39 per location / month ($29 on Group)</p>
-        <p>Harassment, safety, allergen and food safety training in English and Spanish, concern reporting, policy sign-offs, certification tracking, incident logs and training reports. Covers 40 people per location, then 75¢ a person.</p>
+        <p class="ap">Expected $39 per location / month ($29 on Group)</p>
+        <p>Harassment, safety, allergen and food safety training in English and Spanish, concern reporting, policy sign-offs, certification tracking, incident logs and training reports. Covers 40 people per location, then 75¢ a person. Ask about early access when you request a demo.</p>
       </div>
       <div class="addon">
         <h3>CrunchTime connection</h3>
@@ -319,7 +323,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             <label class="chk"><input type="checkbox" data-feat="inventory" checked><div><b>Inventory and food cost</b><span>Counts by weight, prep lists, food cost reports</span></div></label>
             <label class="chk"><input type="checkbox" data-feat="nutrition"><div><b>Nutrition</b><span>Nutrition and allergen estimates</span></div></label>
             <label class="chk"><input type="checkbox" data-feat="ai" checked><div><b>nappAI</b><span>Answers questions, reads invoices, drafts the Menu Guide</span></div></label>
-            <label class="chk"><input type="checkbox" data-add="hr"><div><b>HR &amp; Compliance</b><span>Add-on: training, reports, sign-offs, certifications</span></div></label>
+            <label class="chk"><input type="checkbox" data-add="hr"><div><b>HR &amp; Compliance <em class="soon-i">launching soon</em></b><span>Shown as an expected price, not added to the total</span></div></label>
             <label class="chk"><input type="checkbox" data-add="ct"><div><b>CrunchTime connection</b><span>Add-on: your CrunchTime prices and counts</span></div></label>
           </div>
         </fieldset>
@@ -431,10 +435,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     if (extra) line(extra + ' more ' + (extra === 1 ? 'person' : 'people') + ' × ' + money(P.extraPerson), extra * P.extraPerson);
     if (add.hr && plan !== 'enterprise') {
       var per = plan === 'group' ? P.hr.groupPerLoc : P.hr.perLoc, hrExtra = Math.max(0, people - locs * P.hr.peoplePerLoc);
-      line('HR & Compliance, ' + locs + ' location' + (locs === 1 ? '' : 's') + (hrExtra ? ' + ' + hrExtra + ' people' : ''), locs * per + hrExtra * P.hr.extraPerson);
+      lines.push(['HR & Compliance, launching soon (not in the total)', 'about ' + money(locs * per + hrExtra * P.hr.extraPerson)]);
     }
     if (add.ct && plan !== 'enterprise') line('CrunchTime connection', P.ct);
-    if (plan === 'enterprise') { if (add.hr) lines.push(['HR & Compliance', 'Included']); if (add.ct) lines.push(['CrunchTime connection', 'Included']); }
+    if (plan === 'enterprise') { if (add.hr) lines.push(['HR & Compliance (launching soon)', 'Included']); if (add.ct) lines.push(['CrunchTime connection', 'Included']); }
 
     $('t-plan').textContent = plan === 'enterprise' ? 'Enterprise' : P[plan].name;
     $('t-why').textContent = why;
@@ -448,7 +452,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     $('t-yr').textContent = bill === 'year' ? money(total * P.yearMonths) + ' a year, instead of ' + money(total * 12) + '.' : 'Or ' + money(total * P.yearMonths) + ' a year if you pay yearly (2 months free).';
     $('t-cta').textContent = plan === 'enterprise' ? 'Ask for a quote' : 'Get started with a demo';
     var est = $('t-plan').textContent + ' plan, ' + concepts + ' concept' + (concepts === 1 ? '' : 's') + ', ' + locs + ' location' + (locs === 1 ? '' : 's') + ', ' + people + ' people' +
-      (add.hr ? ', HR & Compliance' : '') + (add.ct ? ', CrunchTime' : '') + '. About ' + $('t-sum').textContent + ' ' + $('t-sum-per').textContent + '.';
+      (add.hr ? ', interested in HR & Compliance (launching soon)' : '') + (add.ct ? ', CrunchTime' : '') + '. About ' + $('t-sum').textContent + ' ' + $('t-sum-per').textContent + '.';
     $('t-cta').href = '/?est=' + encodeURIComponent(est) + '&locs=' + locs + '#demo';
   }
 

@@ -26,6 +26,7 @@ a{color:var(--sauce)} a:hover{color:var(--sauce-deep)}
 .top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:24px;padding-bottom:24px;flex-wrap:wrap}
 .mark{font-family:var(--display);font-weight:800;font-size:30px;letter-spacing:-.03em;text-decoration:none;line-height:1}
 .mark span{font-weight:500;opacity:.85}
+.mark span::after{content:"\2122";font-weight:500;font-size:.38em;vertical-align:super;margin-left:.08em;letter-spacing:0;opacity:.9}
 .nav{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
 .nav a{text-decoration:none;font-weight:500;font-size:16px} .nav a:hover{text-decoration:underline;text-underline-offset:4px}
 .nav a[aria-current="page"]{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}
@@ -378,7 +379,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Nappé Studio</span>
+    <span>© 2026 Nappé Studio™</span>
     <span><a href="/">Home</a> &nbsp;·&nbsp; <a href="https://app.nappestudio.com">Sign in</a> &nbsp;·&nbsp; <a href="mailto:hello@nappestudio.com">hello@nappestudio.com</a></span>
   </div>
 </footer>

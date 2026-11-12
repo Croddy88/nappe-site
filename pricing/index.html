@@ -193,7 +193,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <h3>Starter</h3>
         <p class="for">One restaurant getting its specs and training in order.</p>
         <div class="price" data-price="79">$79<small> /month</small></div>
-        <p class="per">1 location · up to 15 people</p>
+        <p class="per">1 location · 15 people included, up to 50 ($2 a person after 15)</p>
         <ul>
           <li>Recipes and line builds, with photos and video</li>
           <li>Learning Center: modules, tests, welcome tours</li>
@@ -399,7 +399,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 (function () {
   // ---- the prices (change them here) ----
   var P = {
-    starter: { name: 'Starter', price: 79, people: 15 },          // 1 location, up to 15 people
+    starter: { name: 'Starter', price: 79, people: 15, maxPeople: 50 },   // 1 location, 15 people included, up to 50 ($2 each after 15)
     pro: { name: 'Pro', price: 179, peoplePerLoc: 40 },            // per location
     group: { name: 'Group', price: 149, peoplePerLoc: 40, minLocs: 3 },
     // Group price per location, by bracket: [from location, to location, price each]
@@ -427,9 +427,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     var plan, why;
     if (locs >= P.enterpriseFrom) { plan = 'enterprise'; why = locs + ' locations is Enterprise size. Here is the estimate at Group pricing; Enterprise pricing is usually lower.'; }
     else if (concepts >= 2 || locs >= P.group.minLocs) { plan = 'group'; why = concepts >= 2 ? 'More than one concept fits the Group plan.' : 'Three or more locations fits the Group plan.'; }
-    else if (proFeature || people > P.starter.people || locs > 1) {
+    else if (proFeature || people > P.starter.maxPeople || locs > 1) {
       plan = 'pro';
-      var r = []; if (proFeature) r.push('the features you picked'); if (people > P.starter.people) r.push('more than ' + P.starter.people + ' people'); if (locs > 1) r.push('a second location');
+      var r = []; if (proFeature) r.push('the features you picked'); if (people > P.starter.maxPeople) r.push('more than ' + P.starter.maxPeople + ' people'); if (locs > 1) r.push('a second location');
       why = 'Pro, for ' + r.join(' and ') + '.';
     } else { plan = 'starter'; why = 'Recipes, line builds, training and the Menu Guide for one restaurant.'; }
 

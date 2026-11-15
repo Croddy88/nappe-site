@@ -196,6 +196,7 @@ section{scroll-margin-top:64px}
 .big b{font-family:var(--display);font-size:54px;letter-spacing:-.04em;color:var(--sauce);line-height:1;font-variant-numeric:tabular-nums}
 .big span{color:var(--muted);font-size:15px}
 .bars{display:grid;gap:8px;margin-bottom:14px}
+.mock-quiz{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding:10px 14px;border-radius:12px;background:var(--sauce);color:var(--paper);font-size:14px;font-weight:600}.mock-quiz b{font-family:var(--display);font-size:18px;font-weight:800}
 .bars i{display:block;height:10px;border-radius:6px;background:linear-gradient(90deg,var(--sauce),#5E8F7F);width:var(--w);transform-origin:left}
 .panel.is-on .bars i{animation:grow .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(.3s + var(--i,0) * 120ms)}
 @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -349,12 +350,14 @@ section{scroll-margin-top:64px}
             <div><dt>The right view for each role</dt><dd>Servers, hosts and bartenders see the menu guide. Your recipes and costs stay in the kitchen.</dd></div>
             <div><dt>Today's 86 list</dt><dd>What's out tonight sits at the top of the menu guide, and the dish is marked, so nobody sells the last halibut twice.</dd></div>
             <div><dt>Pre-shift notes</dt><dd>Features, VIPs and what to push, written once by the chef and on every server's phone before lineup.</dd></div>
+            <div><dt>Menu flash cards and a weekly quiz</dt><dd>Flash cards built from the menu guide, and a new ten-question menu quiz for every concept each Monday. Points, study streaks, badges and a weekly top five make it a game. Managers see who took it and which dishes get missed.</dd></div>
           </dl>
           <div class="mock" aria-hidden="true">
             <div class="mock-86"><span class="tag86">86</span> Halibut <em>(back tomorrow)</em></div>
             <div class="mock-t">Hanger steak frites</div>
             <p class="mock-say">"Grilled to order, with hand-cut fries and a bright chimichurri."</p>
             <div class="chips"><span>Dairy</span><span>Allium</span><span class="ok">Gluten free</span></div>
+            <div class="mock-quiz"><span>This week's menu quiz</span><b>9 / 10</b></div>
           </div>
         </div>
 
@@ -378,7 +381,7 @@ section{scroll-margin-top:64px}
         <div role="tabpanel" id="p-inv" aria-labelledby="t-inv" class="panel" hidden>
           <dl class="mods">
             <div><dt>Counts by weight</dt><dd>Count area by area on a phone, with several people at once. The studio and nappAI point out numbers that look wrong before a chef closes the count at your last invoice prices.</dd></div>
-            <div><dt>Prep counts and prep lists</dt><dd>A quick daily count of what's already made, checked against pars that change by day, turns into the prep list for the shift.</dd></div>
+            <div><dt>Prep counts and prep lists</dt><dd>A quick daily count of what's already made, checked against pars that change by day, turns into the prep list for the shift, sorted by prep cook and sent to each cook's phone. A chef initials each item once it's been checked.</dd></div>
             <div><dt>Food cost reports</dt><dd>Opening inventory, plus purchases from your invoices, minus closing inventory, for every period between counts. Food and beverage cost, by category, against your sales.</dd></div>
             <div><dt>Price changes</dt><dd>When an invoice moves a price, see every dish it reaches and what each plate costs now, before it shows up in your month.</dd></div>
             <div><dt>Waste, orders and transfers</dt><dd>Log waste with a reason, get an order guide by vendor from your pars, and move product between concepts or locations without throwing off anyone's food cost.</dd></div>
@@ -396,6 +399,8 @@ section{scroll-margin-top:64px}
           <dl class="mods">
             <div><dt>English and Spanish</dt><dd>One tap switches the whole studio, recipes and training included. New specs are translated as soon as they're saved.</dd></div>
             <div><dt>nappAI</dt><dd>Ask how a dish is built or what a plate costs and get an answer from your own specs. It reads invoices and drafts the menu guide too.</dd></div>
+            <div><dt>Access you control</dt><dd>Admins choose exactly what each manager and chef can edit. Front of house never sees recipes, costs or invoices.</dd></div>
+            <div><dt>Set up for every hand</dt><dd>Left-handed mode moves the main buttons to the left side of the screen. Dark mode for late service. Each person picks what works on their own phone.</dd></div>
             <div><dt>Every change on record</dt><dd>See who changed a spec and when, jump straight to the change, and undo it in one click.</dd></div>
             <div><dt>Your data is yours</dt><dd>Export everything, any time: specs, costs, training records and files, in formats any spreadsheet opens.</dd></div>
             <div><dt>Add-ons when you need them</dt><dd>HR &amp; Compliance (launching soon) for harassment and safety training, concern reporting, sign-offs and certifications. Custom integrations with the systems you already run: point of sale like Toast, MICROS and Aloha, inventory like CrunchTime, maintenance like HotSOS, scheduling like HotSchedules, and more.</dd></div>
@@ -461,7 +466,7 @@ section{scroll-margin-top:64px}
     <div>
       <h2 id="demo-title">See it with your own menu.</h2>
       <p>Tell us a little about your group and we'll walk you through the studio with a few of your own dishes loaded in.</p>
-      <p>Rather look around on your own first? <a href="https://app.nappestudio.com/?demo">Open the demo studio</a>. It signs you straight in and gives you a short guided tour.</p>
+      <p>Rather look around on your own first? <a href="https://app.nappestudio.com/?demo">Open the demo studio</a>. It signs you straight in and gives you a short guided tour, read aloud, so you can listen while you click around.</p>
       <p>Want to see prices first? <a href="/pricing">Price your setup</a>. Prefer email? Write to <a href="mailto:hello@nappestudio.com">hello@nappestudio.com</a>.</p>
     </div>
 

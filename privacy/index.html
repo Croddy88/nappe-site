@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy · Nappé Studio</title>
+<meta name="description" content="What information Nappé Studio collects, how it is used, and the choices you have.">
+<link rel="canonical" href="https://nappestudio.com/privacy">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Crect width='240' height='240' rx='54' fill='%232F5D50'/%3E%3Cpath d='M88 140V70M88 96Q88 62 120 62Q152 62 152 96V154' fill='none' stroke='%23F7F3EC' stroke-width='30' stroke-linecap='round'/%3E%3Cpath d='M152 168C152 168 161 180 161 186A9 9 0 0 1 143 186C143 180 152 168 152 168Z' fill='%23F7F3EC'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+:root{--sauce:#2F5D50;--sauce-deep:#24493F;--cream:#F7F3EC;--paper:#FFFDF8;--ink:#22302B;--muted:#56635E;--line:#DCD4C6;--butter:#F3D27A;--display:'Outfit',system-ui,sans-serif;--body:'Figtree',system-ui,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--sauce)} a:hover{color:var(--sauce-deep)}
+:focus-visible{outline:3px solid var(--sauce);outline-offset:3px;border-radius:4px}
+.wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 28px}
+.skip{position:absolute;left:-9999px} .skip:focus{left:16px;top:16px;background:var(--paper);padding:8px 14px;z-index:10}
+.coat{background:var(--sauce);color:var(--cream)} .coat a{color:var(--cream)} .coat :focus-visible{outline-color:var(--butter)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:24px;padding-bottom:24px;flex-wrap:wrap}
+.mark{font-family:var(--display);font-weight:800;font-size:30px;letter-spacing:-.03em;text-decoration:none;line-height:1}
+.mark span{font-weight:500;opacity:.85}
+.mark span::after{content:"\2122";font-weight:500;font-size:.38em;vertical-align:super;margin-left:.08em;opacity:.9}
+.nav{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.nav a{text-decoration:none;font-weight:500;font-size:16px} .nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.nav a[aria-current="page"]{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}
+.intro{padding-top:18px;padding-bottom:44px}
+.intro h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,6vw,68px);line-height:1;letter-spacing:-.04em;margin:0 0 12px}
+.intro p{margin:0;max-width:62ch;opacity:.9}
+.doc{display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-top:48px;padding-bottom:72px;align-items:start}
+.toc{position:sticky;top:24px;font-size:14.5px;line-height:1.5}
+.toc b{display:block;font-family:var(--display);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.toc a{text-decoration:none;color:var(--ink)} .toc a:hover{color:var(--sauce);text-decoration:underline}
+article{max-width:72ch;min-width:0}
+article h2{font-family:var(--display);font-weight:700;font-size:24px;letter-spacing:-.01em;margin:40px 0 10px;scroll-margin-top:20px;text-wrap:balance}
+article h3{font-family:var(--display);font-weight:600;font-size:18px;margin:26px 0 8px;scroll-margin-top:20px}
+article p,article li{margin:0 0 12px}
+article ul,article ol{padding-left:22px;margin:0 0 14px}
+article .meta{color:var(--muted);font-size:15px}
+.tbl{overflow-x:auto;margin:10px 0 18px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+.tbl table{width:100%;border-collapse:collapse;font-size:15px;min-width:520px}
+.tbl th,.tbl td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px solid var(--line)}
+.tbl tr:last-child th,.tbl tr:last-child td{border-bottom:0}
+.tbl thead th{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.tbl tbody th{font-weight:600;width:34%}
+.part{margin-top:56px;padding-top:28px;border-top:3px solid var(--sauce)}
+.part > h2:first-child{margin-top:0;font-size:30px}
+footer{background:var(--sauce-deep);color:rgba(247,243,236,.85);padding:28px 0;font-size:15px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--cream)}
+footer .foot-fine{flex-basis:100%;font-size:13px;line-height:1.6;color:rgba(247,243,236,.7);border-top:1px solid rgba(247,243,236,.15);padding-top:14px}
+@media (max-width:860px){.doc{grid-template-columns:minmax(0,1fr);gap:24px;padding-top:28px}.toc{position:static;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px}.toc ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 14px}}
+@media (max-width:520px){.wrap{padding:0 18px}.toc ol{grid-template-columns:minmax(0,1fr)}body{font-size:16px}}
+@media print{.coat,.toc,footer{display:none}.doc{display:block;padding:0}body{background:#fff}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the text</a>
+<header class="coat">
+  <div class="wrap top">
+    <a class="mark" href="/" aria-label="Nappé Studio, home">nappé <span>studio</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="/pricing">Pricing</a>
+      <a href="/terms">Terms</a>
+      <a href="/privacy" aria-current="page">Privacy</a>
+      <a href="https://app.nappestudio.com">Sign in</a>
+    </nav>
+  </div>
+  <div class="wrap intro">
+    <h1>Privacy Policy</h1>
+    <p>What we collect through nappestudio.com and the Nappé Studio app, how we use it, and the choices you have. Effective November 15, 2026.</p>
+  </div>
+</header>
+<main id="main" class="wrap doc">
+  <nav class="toc" aria-label="On this page"><b>On this page</b><ol><li><a href="#kinds">1. Two kinds of information</a></li><li><a href="#collect">2. What we collect</a></li><li><a href="#use">3. How we use it</a></li><li><a href="#share">4. Who we share it with</a></li><li><a href="#cookies">5. Cookies and similar technology</a></li><li><a href="#keep">6. How long we keep it</a></li><li><a href="#security">7. Security</a></li><li><a href="#choices">8. Your choices and rights</a></li><li><a href="#changes">9. Changes</a></li><li><a href="#contact">10. Contact</a></li></ol></nav>
+  <article><p class="meta">Effective November 15, 2026.</p>
+<p>This policy explains what information Nappe Studio LLC ("Nappé Studio," "we") collects through nappestudio.com and the Nappé Studio app (app.nappestudio.com), how we use it, and the choices you have. Questions: <a href="mailto:legal@nappestudio.com">legal@nappestudio.com</a>.</p>
+<h2 id="kinds">1. Two kinds of information</h2>
+<ul><li><b>Information our clients put in the app.</b> Restaurants (our clients) use the app to manage their recipes, training and staff. For that information, the restaurant is in charge and we process it on their behalf. If you work at a restaurant that uses Nappé Studio, contact your employer about your information; we will help them respond.</li>
+<li><b>Information about our own visitors and customers.</b> For people who visit our website, ask for a demo, or buy a subscription, we decide how the information is used, as described below.</li></ul>
+<h2 id="collect">2. What we collect</h2>
+<div class="tbl"><table><thead><tr><th>Kind</th><th>Examples</th><th>Where it comes from</th></tr></thead><tbody>
+<tr><td>Account details</td><td>Name, work email, role, which concepts and locations a person can see</td><td>The restaurant's manager, or the person signing up</td></tr>
+<tr><td>Restaurant content</td><td>Recipes, line builds, photos, videos, ingredients, invoices, menus, inventory counts</td><td>The restaurant's staff</td></tr>
+<tr><td>Training records</td><td>Modules completed, test and quiz scores, completion dates</td><td>The restaurant's staff, through the Learning Center</td></tr>
+<tr><td>Notification settings</td><td>A device address for push notifications and which alerts a person turned on</td><td>The person, when they turn on notifications</td></tr>
+<tr><td>Demo and contact requests</td><td>Name, email, restaurant, number of locations, message</td><td>Forms on nappestudio.com</td></tr>
+<tr><td>Billing and agreements</td><td>Business name, billing email, plan, signed agreements and the details recorded when they're signed (name, time, IP address, browser). Card details go straight to Stripe; we never see or store the full card number</td><td>The customer and Stripe</td></tr>
+<tr><td>Technical data</td><td>Browser type, device type, pages used, error logs, IP address</td><td>Collected automatically when the site or app is used</td></tr></tbody></table></div>
+<p>The app is for restaurant businesses and their staff. We do not knowingly collect information from children under 13.</p>
+<h2 id="use">3. How we use it</h2>
+<ul><li>To run the app: sign-in, showing each person what their role allows, saving their work, sending the notifications and emails they asked for.</li>
+<li>To provide AI features a restaurant turns on, such as answering questions from its own specs, reading invoices, translating and drafting menu text.</li>
+<li>To bill customers, keep signed agreements and send account notices.</li>
+<li>To keep the service secure, back it up nightly, find and fix problems, and prevent misuse.</li>
+<li>To answer demo requests and support questions.</li>
+<li>To improve the service using combined statistics that do not identify anyone.</li></ul>
+<p>We do not sell personal information, we do not share it for advertising, and we do not use restaurant content to train AI models.</p>
+<h2 id="share">4. Who we share it with</h2>
+<p>We share information only with service providers that help us run Nappé Studio, under contracts that limit their use of it (the full list is in the <a href="/terms#dpa">Data Processing Addendum</a>): Google (Firebase database, sign-in and file storage, and the Gemini service that turns voice notes into text), Netlify (website and app hosting, and our website forms), Anthropic (AI features), Postmark (email), and Stripe (payments). We may also share information if the law requires it, to protect people's safety, or as part of a sale or merger of our business, with notice to customers.</p>
+<h2 id="cookies">5. Cookies and similar technology</h2>
+<p>The app stores small amounts of information in your browser (for example, your language, theme, sign-in and last page) so it works the way you left it, and it can keep a copy on your device for use without a connection. Our website loads its fonts from Google Fonts, which receives your IP address when it sends them. We do not use advertising cookies or third-party analytics trackers.</p>
+<h2 id="keep">6. How long we keep it</h2>
+<p>We keep a restaurant's information while it has an active subscription, then for 60 days so it can export it or come back, then delete it. Nightly backups are kept for 90 days. Billing records and signed agreements are kept as long as tax and contract law require. Demo requests are kept for 2 years unless you ask us to delete them sooner.</p>
+<h2 id="security">7. Security</h2>
+<p>Information is encrypted in transit and at rest by our providers. Each person signs in with their own account, and the database itself checks every request against that person's role and restaurant, so staff only see what their role allows and one restaurant can never see another's data. No system is perfectly secure. If a breach affects your information, we will notify the affected restaurants and people as the law requires.</p>
+<h2 id="choices">8. Your choices and rights</h2>
+<ul><li>Staff can update their name and turn notifications on or off in the app.</li>
+<li>Restaurants can export or delete their data at any time.</li>
+<li>Depending on where you live, you may have rights to access, correct, delete or get a copy of your personal information. Email <a href="mailto:legal@nappestudio.com">legal@nappestudio.com</a>. If the information belongs to a restaurant client, we will pass your request to them and help them respond.</li></ul>
+<h2 id="changes">9. Changes</h2>
+<p>We will post changes here and update the date at the top. For material changes we will also email customers.</p>
+<h2 id="contact">10. Contact</h2>
+<p>Nappe Studio LLC, 2820 S Alma School Rd, Ste 18 #4448, Chandler, AZ 85286<br><a href="mailto:legal@nappestudio.com">legal@nappestudio.com</a></p></article>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Nappé Studio™</span>
+    <span><a href="/pricing">Pricing</a> &nbsp;·&nbsp; <a href="/terms">Terms</a> &nbsp;·&nbsp; <a href="/privacy">Privacy</a> &nbsp;·&nbsp; <a href="mailto:hello@nappestudio.com">hello@nappestudio.com</a></span>
+    <span class="foot-fine">Support: <a href="mailto:support@nappestudio.com">support@nappestudio.com</a>, Monday to Saturday, 8 a.m. to 8 p.m. Arizona time<br>Nappe Studio LLC · 2820 S Alma School Rd, Ste 18 #4448, Chandler, AZ 85286</span>
+  </div>
+</footer>
+</body>
+</html>

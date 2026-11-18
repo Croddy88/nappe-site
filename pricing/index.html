@@ -203,7 +203,7 @@ footer .foot-fine{flex-basis:100%;font-size:13px;line-height:1.6;color:rgba(247,
       <article class="plan">
         <h3>Starter</h3>
         <p class="for">One restaurant getting its specs and training in order.</p>
-        <div class="price" data-price="79">$79<small> /month</small></div>
+        <div class="price" data-price="65">$65<small> /month</small></div>
         <p class="per">1 location · 15 people included, up to 50 ($2 a person after 15)</p>
         <ul>
           <li>Recipes and line builds, with photos and video</li>
@@ -213,7 +213,7 @@ footer .foot-fine{flex-basis:100%;font-size:13px;line-height:1.6;color:rgba(247,
           <li>English and Spanish</li>
           <li>Print-ready spec sheets and cards</li>
           <li>Your ingredient list, with vendors and pack sizes</li>
-          <li class="plus">Add any Pro feature on its own, from $19 a month (<a href="#starter-addons">see prices</a>)</li>
+          <li class="plus">Add any Pro feature on its own, from $16 a month (<a href="#starter-addons">see prices</a>)</li>
         </ul>
         <a class="btn btn-line" href="#calc" data-plan="starter">Price it</a>
       </article>
@@ -221,7 +221,7 @@ footer .foot-fine{flex-basis:100%;font-size:13px;line-height:1.6;color:rgba(247,
         <span class="tag">Most kitchens</span>
         <h3>Pro</h3>
         <p class="for">The full studio for a single concept, one or two locations.</p>
-        <div class="price" data-price="179">$179<small> /month</small></div>
+        <div class="price" data-price="149">$149<small> /month</small></div>
         <p class="per">per location · 40 people included</p>
         <ul>
           <li class="plus">Everything in Starter</li>
@@ -236,7 +236,7 @@ footer .foot-fine{flex-basis:100%;font-size:13px;line-height:1.6;color:rgba(247,
       <article class="plan">
         <h3>Group</h3>
         <p class="for">Several concepts, or three or more locations.</p>
-        <div class="price" data-price="149">$149<small> /month</small></div>
+        <div class="price" data-price="129">$129<small> /month</small></div>
         <p class="per">per location, less with more locations · 3 location minimum</p>
         <ul>
           <li class="plus">Everything in Pro</li>
@@ -267,7 +267,7 @@ footer .foot-fine{flex-basis:100%;font-size:13px;line-height:1.6;color:rgba(247,
 
     <div class="vol" id="volume">
       <h3>Volume pricing on Group</h3>
-      <p class="sub" style="font-size:16px">The more you run, the less each one costs. Location prices step down like tax brackets: your first 3 locations are $149 each, the next ones less. The concept discount then comes off the location total.</p>
+      <p class="sub" style="font-size:16px">The more you run, the less each one costs. Location prices step down like tax brackets: your first 3 locations are $129 each, the next ones less. The concept discount then comes off the location total.</p>
       <div class="vol-grid">
         <table>
           <caption>Price per location</caption>
@@ -280,7 +280,7 @@ footer .foot-fine{flex-basis:100%;font-size:13px;line-height:1.6;color:rgba(247,
           <tbody id="vol-concepts"></tbody>
         </table>
       </div>
-      <p class="sub" style="font-size:15px;margin-top:12px">Example: 4 concepts with 7 locations pays 3 × $149 + 2 × $139 + 2 × $129 = $983, then 5% off, for $933.85 a month.</p>
+      <p class="sub" style="font-size:15px;margin-top:12px">Example: 4 concepts with 7 locations pays 3 × $129 + 2 × $125 + 2 × $117 = $871, then 5% off, for $827.45 a month.</p>
     </div>
   </div>
 </section>
@@ -430,15 +430,15 @@ footer .foot-fine{flex-basis:100%;font-size:13px;line-height:1.6;color:rgba(247,
 (function () {
   // ---- the prices (change them here; keep AE_PRICE in the app's team console the same) ----
   var P = {
-    starter: { name: 'Starter', price: 79, people: 15, maxPeople: 50 },   // 1 location, 1 concept, 15 people included, up to 50 ($2 each after 15)
-    pro: { name: 'Pro', price: 179, peoplePerLoc: 40 },            // per location, one concept
-    group: { name: 'Group', price: 149, peoplePerLoc: 40, minLocs: 3 },
+    starter: { name: 'Starter', price: 65, people: 15, maxPeople: 50 },   // 1 location, 1 concept, 15 people included, up to 50 ($2 each after 15)
+    pro: { name: 'Pro', price: 149, peoplePerLoc: 40 },            // per location, one concept
+    group: { name: 'Group', price: 129, peoplePerLoc: 40, minLocs: 3 },
     // Starter add-ons, per month. Pro and up include them all.
-    addons: { daily: 29, costing: 49, inventory: 39, nutrition: 19, ai: 29 },
+    addons: { daily: 25, costing: 39, inventory: 32, nutrition: 16, ai: 25 },
     addonNames: { daily: 'Daily Tools', costing: 'Costing and invoices', inventory: 'Inventory and food cost', nutrition: 'Nutrition', ai: 'nappAI' },
     addonWhat: { daily: 'Station maps, line checks, shift notes, prep lists, menus', costing: 'Invoice reading, price changes and live plate costs', inventory: 'Counts by weight, food cost reports', nutrition: 'Nutrition and allergen estimates', ai: 'Answers questions, reads invoices, drafts the Menu Guide' },
     // Group price per location, by bracket: [from location, to location, price each]
-    locBreaks: [[1, 3, 149], [4, 5, 139], [6, 10, 129], [11, 15, 119], [16, 9999, 109]],
+    locBreaks: [[1, 3, 129], [4, 5, 125], [6, 10, 117], [11, 15, 105], [16, 9999, 95]],
     // discount off the location total, by number of concepts: [from, to, percent]
     conceptBreaks: [[1, 3, 0], [4, 5, 5], [6, 10, 10], [11, 999, 15]],
     enterpriseFrom: 16,                                             // locations
